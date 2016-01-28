@@ -1,4 +1,5 @@
-1.创建docker的yum库
+#centos7下安装最新版的docker
+1. 创建docker的yum库
 [root@localhost~]# cd /etc/yum.repos.d/
 [root@localhostyum.repos.d]# vim docker.repo
 [dockerrepo]
@@ -9,27 +10,27 @@ gpgcheck=1
 gpgkey=https://yum.dockerproject.org/gpg
 
 
-（2）安装docker
+2. 安装docker
 [root@localhost~]# yum install docker-engine
 
-（3）关闭centos7下的firewalld服务并安装iptables-ser
+3. 关闭centos7下的firewalld服务并安装iptables-ser
 
 [root@localhost~]# systemctl disable firewalld
 rm'/etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service'
 rm'/etc/systemd/system/basic.target.wants/firewalld.service'
 [root@localhost~]# yum -y install iptables-services
 
-（4）开启iptables服务
+4. 开启iptables服务
 [root@localhost~]# systemctl enable iptables
 ln-s '/usr/lib/systemd/system/iptables.service''/etc/systemd/system/basic.target.wants/iptables.service'
 [root@localhost~]# systemctl start iptables
 Linux学习，http:// linux.it.net.cn 
-（5）启动docker服务并设置开机自动启动
+5. 启动docker服务并设置开机自动启动
 [root@localhost~]# systemctl start docker.service
 [root@localhost~]# systemctl enable docker.service
 ln-s '/usr/lib/systemd/system/docker.service''/etc/systemd/system/multi-user.target.wants/docker.service'
 
-（6）验证docker是否安装成功
+6. 验证docker是否安装成功
 [root@localhost~]# docker info
 Containers:0
 Images:0
@@ -59,7 +60,7 @@ TotalMemory: 1.791 GiB
 Name:localhost.localdomain
 ID:2EEQ:3VMI:TIUY:NUHZ:NZMQ:VOD7:YW3K:KZG3:IQZT:XR4Q:G4XJ:TCVM
 
-（8）查看安装后的docker版本
+7. 查看安装后的docker版本
 [root@localhost~]# docker version
 Client:
 Version:     1.8.2
