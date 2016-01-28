@@ -59,7 +59,7 @@ docker run --name nginx -volumes-from webdata -d -p 80:80 nginx
 
 启动php容器
 ```sh
-docker run --name php -volumes-from webdata -d php:7.0.2-fpm
+docker run --name php --volumes-from webdata -d php:7.0.2-fpm
 ```
 此时docker ps -a是就能看到容器启动情况
 
@@ -86,11 +86,16 @@ iptables -L -n
 修改php配置部分正确之后保存
 
 ```sh
+location / {
+        root   /usr/share/nginx/html;
+        index  index.php index.html index.htm;
+    }
+............
 location ~ \.php$ {
-        root           /usr/share/nginx/html;
-        fastcgi_pass   127.0.0.1:9000;
+        root           /usr/share/nginx/html/;
+        fastcgi_pass   172.17.0.5:9000;
         fastcgi_index  index.php;
-        fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
         include        fastcgi_params;
     }
 ```
@@ -99,4 +104,6 @@ location ~ \.php$ {
 
 ```sh
 docker cp /root/new.conf nginx:/etc/nginx/conf.d/
+#如有必要，重启下nginx容器
+docker restart nginx
 ```
