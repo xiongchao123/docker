@@ -33,4 +33,4 @@ $ docker exec -it some-mysql bash
 $ docker logs some-mysql
 ```
 > 参考地址
-[点击进入]（https://github.com/DaoCloud/library-image/tree/master/mysql）
+[点击进入](https://github.com/DaoCloud/library-image/tree/master/mysql)
