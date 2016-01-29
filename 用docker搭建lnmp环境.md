@@ -50,6 +50,8 @@ mysql容器[中文文档地址](https://github.com/DaoCloud/library-image/tree/m
 $ docker run -d -v /usr/share/nginx/html --name webdata zhaojianhui/lnmp echo Data-only container for postgres
 ```
 
+> 经过实践，php代码还是从主机目录直接挂载比较方便，新建数据卷容器操作代码比较麻烦，更新代码不方便
+
 ###启动nginx容器
 ```sh
 docker run --name nginx -volumes-from webdata -d -p 80:80 nginx
