@@ -1,14 +1,14 @@
 ### 准备工作：
 ```sh
 $ docker pull mysql
-$ docker pull php:7.0.2-fpm
+$ docker pull php:fpm
 $ docker pull nginx
 ```
 
 ## MYSQL部分
 #### 新建数据卷容器（存放mysql数据库文件）
 ```sh
-$ docker run -d -v /var/lib/mysql --name mysqldata zhaojianhui/lnmp echo Data-only container for postgres
+$ docker run -d -v /var/lib/mysql --name mysqldata training/postgres echo Data-only container for postgres
 ```
 > -v 参数为指定的目录，挂在此数据卷容器的目录以此为准，在其他容器中使用 --volumes-from 来挂载 dbdata 容器中的数据卷。
 
@@ -18,6 +18,13 @@ $ docker run -d -v /var/lib/mysql --name mysqldata zhaojianhui/lnmp echo Data-on
 ```sh
 $ docker run --name mysql --volumes-from mysqldata -e MYSQL_ROOT_PASSWORD=123456 -d mysql
 ```
+
+使用本地目录作为数据库的数据存储目录，使用数据卷容器不方便定位数据库文件，而且使用数据卷容器太大。
+```sh
+docker run --name mysql -v /data/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+```
+> 数据库数据目录记得提前创建好
+
 绑定映射主机端口
 ```sh
 docker run --name mysql2 --volumes-from mysqldata2 -e MYSQL_ROOT_PASSWORD=123456 -p 127.0.0.1:3306:3306 -d mysql
@@ -56,6 +63,7 @@ $ docker run -d -v /usr/share/nginx/html --name webdata zhaojianhui/lnmp echo Da
 ```sh
 docker run --name nginx -volumes-from webdata -d -p 80:80 nginx
 ```
+
 
 ##php部分
 
