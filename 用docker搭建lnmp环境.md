@@ -21,13 +21,13 @@ $ docker run --name mysql --volumes-from mysqldata -e MYSQL_ROOT_PASSWORD=123456
 
 使用本地目录作为数据库的数据存储目录，使用数据卷容器不方便定位数据库文件，而且使用数据卷容器太大。
 ```sh
-docker run --name mysql -v /data/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+docker run --name mysql -v /data/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql
 ```
 > 数据库数据目录记得提前创建好
 
 绑定映射主机端口
 ```sh
-docker run --name mysql2 --volumes-from mysqldata2 -e MYSQL_ROOT_PASSWORD=123456 -p 127.0.0.1:3306:3306 -d mysql
+docker run --name mysql2 --volumes-from mysqldata2 -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql
 ```
 > 注意，在启动新的数据库容器是，挂在的数据卷不能公用，否则会导致错误
 
@@ -63,6 +63,11 @@ $ docker run -d -v /usr/share/nginx/html --name webdata zhaojianhui/lnmp echo Da
 ```sh
 docker run --name nginx -volumes-from webdata -d -p 80:80 nginx
 ```
+使用挂载宿主机目录的形式启动容器
+```sh
+docker run --name nginx -v /mnt/hgfs/GIT/:/www-data/  -p 80:80 -d nginx
+```
+> 平时在虚拟机上搭建环境，上面的命令是在虚拟机环境下，关于window下虚拟机目录挂载的问题可以百度，使用宿主机上已有目录挂载，
 
 
 ##php部分
