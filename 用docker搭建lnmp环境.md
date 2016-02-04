@@ -48,6 +48,15 @@ mysql容器[官方文档地址](https://hub.docker.com/_/mysql/)
 
 mysql容器[中文文档地址](https://github.com/DaoCloud/library-image/tree/master/mysql)
 
+##php部分
+
+启动php容器
+```sh
+docker run --name php -v /mnt/hgfs/GIT/:/www-data/ -d php:fpm
+```
+此时docker ps -a是就能看到容器启动情况
+使用docker-ip php查看容器ip，在后面使用nginx搭建服务时会用到此ip
+
 ##nginx部分
 
 
@@ -63,20 +72,22 @@ $ docker run -d -v /usr/share/nginx/html --name webdata zhaojianhui/lnmp echo Da
 ```sh
 docker run --name nginx -volumes-from webdata -d -p 80:80 nginx
 ```
-使用挂载宿主机目录的形式启动容器
+使用挂载宿主机目录的形式启动容器，记得在运行php环境时，一定要先启动php容器：
 ```sh
+#官方nginx
 docker run --name nginx -v /mnt/hgfs/GIT/:/www-data/  -p 80:80 -d nginx
+#自定义nginx
+docker run --name nginx -v /mnt/hgfs/GIT/:/www-data/  -p 80:80 -d zhaojianhui/lnmp:nginx
 ```
+或者使用-volumes-from参数来是的nginx和php有同样的目录访问
+```sh
+docker run --name nginx -volumes-from php  -p 80:80 -d zhaojianhui/lnmp:nginx
+```
+
 > 平时在虚拟机上搭建环境，上面的命令是在虚拟机环境下，关于window下虚拟机目录挂载的问题可以百度，使用宿主机上已有目录挂载，
 
 
-##php部分
 
-启动php容器
-```sh
-docker run --name php --volumes-from webdata -d php:7.0.2-fpm
-```
-此时docker ps -a是就能看到容器启动情况
 
 ###整合php和nginx
 从nginx容器中拷贝配置文件到主机
