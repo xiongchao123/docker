@@ -2,7 +2,8 @@
 1. 创建docker的yum库
 ```sh
 [root@localhost~]# cd /etc/yum.repos.d/
-[root@localhostyum.repos.d]# vim docker.repo
+[root@localhostyum.repos.d]# vi docker.repo
+#复制以下配置，然后保存退出
 [dockerrepo]
 name=DockerRepository
 baseurl=https://yum.dockerproject.org/repo/main/centos/7
@@ -14,7 +15,7 @@ gpgkey=https://yum.dockerproject.org/gpg
 
 2. 安装docker
 ```sh
-[root@localhost~]# yum install docker-engine
+[root@localhost~]# yum install docker-engine -y
 ```
 
 3. 关闭centos7下的firewalld服务并安装iptables-ser
