@@ -1,6 +1,19 @@
 # docker
 docker学习，新手勿喷
 
+官方仓库地址：
+> php           
+> [英文地址](https://hub.docker.com/_/php/)              
+> [中文地址](https://github.com/DaoCloud/library-image/tree/master/php)
+> <br>
+> mysql     
+> [英文地址](https://hub.docker.com/_/mysql/)         
+> [中文地址](https://github.com/DaoCloud/library-image/tree/master/mysql)
+> <br>
+> nginx       
+> [英文地址](https://hub.docker.com/_/nginx/)          
+> [中文地址](https://github.com/DaoCloud/library-image/tree/master/nginx)
+
 ####生成mysql镜像部分
 ```sh
 docker build -t=zhaojianhui/lnmp:mysql ./mysql/
