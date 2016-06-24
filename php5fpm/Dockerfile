@@ -21,27 +21,14 @@ RUN apt-get update && apt-get install -y \
 #    && pecl install memcached \
 #    && docker-php-ext-enable memcached
 
-#RUN apt-get install -y \
-#        git \
-#    && git clone git://github.com/phalcon/cphalcon.git \
-#    && cd cphalcon/build \
-#    && ./install \
-#    && docker-php-ext-enable phalcon \
-#    && cd ../../
-#    && rm -r cphalcon/ \
-
 RUN apt-get install -y \
-        unzip \
-    && cd \
-    && curl -fSL "https://codeload.github.com/phalcon/cphalcon/zip/master" \
-    && unzip cphalcon-master.zip \
-    && cd cphalcon-master\build
-    && ./install
+        git \
+    && git clone git://github.com/phalcon/cphalcon.git \
+    && cd cphalcon/build \
+    && ./install \
     && docker-php-ext-enable phalcon \
     && cd ../../
-    && rm -r cphalcon-master/ \
-    && rm cphalcon-master.zip
-
+    && rm -r cphalcon/ \
 
 
 # 配置文件更改
