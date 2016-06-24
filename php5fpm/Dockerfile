@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
         libxml2-dev \
         libfreetype6-dev \
         libmemcached-dev \
+        git \
     && docker-php-ext-install -j$(nproc) iconv mcrypt bcmath shmop sysvsem mbstring pcntl sockets xmlrpc simplexml zip soap gettext session opcache \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-freetype-dir \
     && docker-php-ext-install -j$(nproc) gd \
@@ -20,6 +21,11 @@ RUN apt-get update && apt-get install -y \
 
 #    && pecl install memcached \
 #    && docker-php-ext-enable memcached
+
+RUN git clone git://github.com/phalcon/cphalcon.git
+    && cd cphalcon/build
+    && ./install
+
 
 # 配置文件更改
 COPY ./conf /usr/local/etc/php
