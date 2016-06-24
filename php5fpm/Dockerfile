@@ -22,9 +22,9 @@ RUN apt-get update && apt-get install -y \
 #    && pecl install memcached \
 #    && docker-php-ext-enable memcached
 
-RUN git clone git://github.com/phalcon/cphalcon.git
-    && cd cphalcon/build
-    && ./install
+RUN git clone git://github.com/phalcon/cphalcon.git \
+    && cd cphalcon/build \
+    && ./install \
     && docker-php-ext-enable phalcon
 
 
