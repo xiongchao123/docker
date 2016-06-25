@@ -29,7 +29,7 @@ RUN apt-get install -y \
     && ./install \
     && docker-php-ext-enable phalcon \
     && cd ../../ \
-    && rm -r cphalcon/ \
+    && rm -r cphalcon/
 
 
 # 配置文件更改
