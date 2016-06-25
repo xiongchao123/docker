@@ -5,8 +5,8 @@
 [root@localhostyum.repos.d]# vi docker.repo
 #复制以下配置，然后保存退出
 [dockerrepo]
-name=DockerRepository
-baseurl=https://yum.dockerproject.org/repo/main/centos/7
+name=Docker Repository
+baseurl=https://yum.dockerproject.org/repo/main/centos/7/
 enabled=1
 gpgcheck=1
 gpgkey=https://yum.dockerproject.org/gpg
