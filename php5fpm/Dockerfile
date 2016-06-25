@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get install -y \
         git \
     && cd \
-    && git clone git://github.com/phalcon/cphalcon.git \
+    && git clone https://github.com/phalcon/cphalcon.git \
     && cd cphalcon/build \
     && ./install \
     && docker-php-ext-enable phalcon \
