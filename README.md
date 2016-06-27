@@ -86,6 +86,8 @@ docker build -t=zhaojianhui/lnmp:nginx ./nginx/
 以php容器的挂载目录为准，挂载同样的目录,使用容器互联的方式，不担心容器IP会变化：
 ```sh
 docker run --name nginx --volumes-from web  -p 80:80 --link php:php --link php5:php5 --link phplaravel:phplaravel -d zhaojianhui/lnmp:nginx
+
+docker run --name nginx --volumes-from web  -p 80:80 --link php:php --link php5:php5 -d zhaojianhui/lnmp:nginx
 ```
 自定义挂载目录，和php的挂载目录保持一致，此方式没有挂载数据卷容器灵活：
 ```sh
