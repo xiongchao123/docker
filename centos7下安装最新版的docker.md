@@ -92,3 +92,10 @@ Built:       Thu Sep 10 19:08:45 UTC 2015
 OS/Arch:     linux/amd64
 ```
 
+8.安装docker工具
+這個檔案中定義了很多方便使用 Docker 的命令，例如 docker-pid 可以取得某個容器的 PID；而 docker-enter 可以進入容器或直接在容器內執行命令。
+
+```sh
+$ wget -P ~ https://github.com/yeasy/docker_practice/raw/master/_local/.bashrc_docker;
+$ echo "[ -f ~/.bashrc_docker ] && . ~/.bashrc_docker" >> ~/.bashrc; source ~/.bashrc
+```

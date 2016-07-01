@@ -42,7 +42,7 @@ docker run --name memcached -d memcached
 ####挂载一个主机目录作为代码数据卷容器
 ```sh
 #自己脑洞大开想的，因为ubuntu镜像比较小
-docker run -d -v /mnt/hgfs/GIT/:/www-data/ --name web ubuntu echo Data-only container for postgres
+docker run -d -v /mnt/hgfs/website/:/www-data/ --name web ubuntu echo Data-only container for postgres
 #手册上新建数据卷容器
 docker run -d -v /mnt/hgfs/GIT/:/www-data/ --name web training/postgres echo Data-only container for postgres
 ```
