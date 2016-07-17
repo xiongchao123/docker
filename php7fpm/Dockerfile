@@ -21,15 +21,11 @@ RUN apt-get update && apt-get install -y \
 #RUN apt-get install -y \
 #        git \
 #    && cd \
-#    && git clone https://github.com/phalcon/cphalcon.git \
-#    && cd cphalcon/ \
-#    && git checkout 2.1.x \
-#    && git pull origin 2.1.x \
-#    && cd build \
+#    && git clone --depth=1 -v https://github.com/phalcon/cphalcon.git -b 2.1.x /tmp/phalcon-ext \
+#    && cd /tmp/phalcon-ext \
 #    && ./install \
 #    && docker-php-ext-enable phalcon \
-#    && cd ../../ \
-#    && rm -r cphalcon/
+#    && rm -rf /tmp/phalcon-ext
 
 # 配置文件更改
 COPY ./conf /usr/local/etc/php
