@@ -34,7 +34,8 @@ ADD installers/*.sh /installers/
 
 RUN apt-get install -y \
         git \
-    && bash /installers/phalcon.sh
+    && bash /installers/phalcon.sh \
+    && apt-get autoremove git
 
 # 配置文件更改
 COPY ./conf /usr/local/etc/php
