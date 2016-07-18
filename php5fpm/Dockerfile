@@ -21,6 +21,9 @@ RUN apt-get update && apt-get install -y \
 #    && pecl install memcached \
 #    && docker-php-ext-enable memcached
 
+# Add installers
+ADD installers/*.sh /installers/
+
 RUN apt-get install -y \
         git \
     && bash /installers/phalcon.sh \
