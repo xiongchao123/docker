@@ -24,8 +24,6 @@ cd /tmp/phalcon-ext
 zephir build
 cp ext/modules/phalcon.so $(php-config --extension-dir)/phalcon.so
 
-docker-php-ext-enable phalcon
-
 cd /
 rm -rf $ZEPHIRDIR /tmp/phalcon-ext /usr/bin/sudo
 export PATH=$ORIG_PATH
