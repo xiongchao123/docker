@@ -23,8 +23,7 @@ ADD installers/*.sh /installers/
 
 RUN apt-get install -y \
         git \
-    && bash /installers/phalcon.sh \
-    && docker-php-ext-enable phalcon
+    && bash /installers/phalcon.sh
 
 # 配置文件更改
 COPY ./conf /usr/local/etc/php

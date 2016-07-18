@@ -24,40 +24,7 @@ cd /tmp/phalcon-ext
 zephir build --backend=ZendEngine3
 cp ext/modules/phalcon.so $(php-config --extension-dir)/phalcon.so
 
-echo 'extension=phalcon.so' | tee /usr/local/etc/php/phalcon.ini
-
-cd /
-rm -rf $ZEPHIRDIR /tmp/phalcon-ext /usr/bin/sudo
-export PATH=$ORIG_PATH
-unset ZEPHIRDIR
-unset ORIG_PATH
-
-
-#!/usr/bin/env bash
-
-ORIG_PATH=$PATH
-
-export ZEPHIRDIR=/usr/share/zephir
-export PATH=$PATH:/usr/share/zephir/bin
-
-mkdir -p $ZEPHIRDIR
-
-git clone --depth=1 -v https://github.com/phalcon/zephir /tmp/zephir
-cd /tmp/zephir
-
-# because containers does not have sudo
-echo "#!/usr/bin/env bash
-exec \"\$@\"" > /usr/bin/sudo
-
-chmod +x /usr/bin/sudo
-(cd parser && phpize --clean)
-./install -c
-cd / && rm -rf /tmp/zephir
-
-git clone --depth=1 -v https://github.com/phalcon/cphalcon.git -b 2.1.x /tmp/phalcon-ext
-cd /tmp/phalcon-ext
-zephir build --backend=ZendEngine3
-cp ext/modules/phalcon.so $(php-config --extension-dir)/phalcon.so
+docker-php-ext-enable phalcon
 
 cd /
 rm -rf $ZEPHIRDIR /tmp/phalcon-ext /usr/bin/sudo
