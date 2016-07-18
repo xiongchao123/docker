@@ -28,7 +28,7 @@ RUN apt-get install -y \
     && ./install \
     && docker-php-ext-enable phalcon \
     && rm -rf /tmp/phalcon-ext \
-    && apt-get autoremove git
+    && apt-get autoremove -y git
 
 # 配置文件更改
 COPY ./conf /usr/local/etc/php
