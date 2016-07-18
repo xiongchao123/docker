@@ -18,21 +18,20 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install mysqli pdo pdo_mysql
 
-#RUN apt-get install -y \
-#        git \
-#    && git clone --depth=1 -v https://github.com/phalcon/cphalcon.git -b 2.1.x /tmp/phalcon-ext \
-#    && cd /tmp/phalcon-ext/build \
-#    && ./install 64bits \
-#    && docker-php-ext-enable phalcon \
-#    && rm -rf /tmp/phalcon-ext
+# Add installers
+ADD installers/*.sh /installers/
 
+RUN apt-get install -y \
+        git \
+    && bash /installers/phalcon.sh \
+    && docker-php-ext-enable phalcon
 
-# 閰嶇疆鏂囦欢鏇存敼
+# 配置文件更改
 COPY ./conf /usr/local/etc/php
 
-# 宸ヤ綔鐩綍
-# 鎷疯礉鏂瑰紡
+# 工作目录
+# 拷贝方式
 # COPY static-html-directory /usr/share/nginx/html
 
-# 鎸傝浇鏂瑰紡
+# 挂载方式
 # VOLUME /mnt/hgfs/GIT/ /www-data/
