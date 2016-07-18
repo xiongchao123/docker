@@ -24,6 +24,8 @@ cd /tmp/phalcon-ext
 zephir build
 cp ext/modules/phalcon.so $(php-config --extension-dir)/phalcon.so
 
+echo 'extension=phalcon.so' | tee /etc/php/5.6/mods-available/phalcon.ini
+
 cd /
 rm -rf $ZEPHIRDIR /tmp/phalcon-ext /usr/bin/sudo
 export PATH=$ORIG_PATH
