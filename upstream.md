@@ -22,5 +22,7 @@ docker restart nginxslave2
 ```sh
 docker run --name nginxmaster -p 8080:80 -d nginx
 docker cp ./upstream/master.conf nginxmaster:/etc/nginx/conf.d/
+echo "<h1>主服务器</h1>" > ./index.html;
+docker cp ./index.html nginxmaster:/usr/share/nginx/html
 docker restart nginxmaster
 ```
