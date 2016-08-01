@@ -20,5 +20,7 @@ docker restart nginxslave2
 ```
 
 ```sh
-docker run --name nginxmaster -p 8080:80 --link nginxslave1:slave2 --link nginxslave2:slave2 -d nginx
+docker run --name nginxmaster -p 8080:80 --link nginxslave1:nginxslave1 --link nginxslave2:nginxslave2 -d nginx
+docker cp ./upstream/master.conf nginxmaster:/etc/nginx/conf.d/
+docker restart nginxmaster
 ```
