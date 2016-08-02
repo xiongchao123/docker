@@ -34,6 +34,13 @@ RUN apt-get install -y \
     && ./install \
     && docker-php-ext-enable phalcon \
     && rm -rf /tmp/phalcon-ext \
+    && git clone --depth 1 -v https://github.com/owlient/phpredis.git /tmp/phpredis \
+    && cd /tmp/phpredis \
+    && phpize \
+    && ./configure \
+    && make \
+    && make install \
+    && docker-php-ext-enable redis \
     && apt-get autoremove -y git
 
 # 配置文件更改
