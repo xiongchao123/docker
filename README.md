@@ -13,6 +13,11 @@ docker学习，新手勿喷
 > nginx       
 > [英文地址](https://hub.docker.com/_/nginx/)          
 > [中文地址](https://github.com/DaoCloud/library-image/tree/master/nginx)
+> 
+> <br>
+> redis
+> [英文地址](https://hub.docker.com/_/redis/)
+> 
 
 ####生成mysql镜像部分
 ```sh
