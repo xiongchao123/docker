@@ -30,16 +30,20 @@ RUN apt-get install -y \
     && rm -rf /tmp/phalcon-ext \
 
 
-#Add phpredis
-RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git /tmp/phpredis \
-    && cd /tmp/phpredis \
-    && phpize \
-    && ./configure \
-    && make && make install \
-    && docker-php-ext-enable redis
+#RUN pecl install igbinary \
+#    && docker-php-ext-enable igbinary \
+#    && cp /usr/include/php/ext/igbinary /usr/local/include/php/ext/igbinary -fr
 
+#Add phpredis
+#RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git /tmp/phpredis \
+#    && cd /tmp/phpredis \
+#    && phpize \
+#    && ./configure --enable-redis-igbinary \
+#    && ./configure \
+#    && make && make install \
+#    && docker-php-ext-enable redis
 # remove
-RUN apt-get autoremove -y git
+# RUN apt-get autoremove -y git
 
 # 配置文件更改
 COPY ./conf /usr/local/etc/php

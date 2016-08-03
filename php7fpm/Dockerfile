@@ -44,16 +44,16 @@ RUN apt-get install -y \
 #    && cp /usr/include/php/ext/igbinary /usr/local/include/php/ext/igbinary -fr
 
 #Add phpredis
-RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git /tmp/phpredis \
-    && cd /tmp/phpredis \
-    && phpize \
+#RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git /tmp/phpredis \
+#    && cd /tmp/phpredis \
+#    && phpize \
 #    && ./configure --enable-redis-igbinary \
-    && ./configure \
-    && make && make install \
-    && docker-php-ext-enable redis
+#    && ./configure \
+#    && make && make install \
+#    && docker-php-ext-enable redis
 
 # remove
-RUN apt-get autoremove -y git
+# RUN apt-get autoremove -y git
 
 # 配置文件更改
 COPY ./conf /usr/local/etc/php
