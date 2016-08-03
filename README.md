@@ -1,6 +1,9 @@
 # docker
 docker学习，新手勿喷
 
+docker加速器
+[文档地址](https://www.daocloud.io/mirror#accelerator-doc)
+
 官方仓库地址：
 > php           
 > [英文地址](https://hub.docker.com/_/php/)              
@@ -21,7 +24,7 @@ docker学习，新手勿喷
 
 ####生成mysql镜像部分
 ```sh
-docker build -t=zhaojianhui/lnmp:mysql ./mysql/
+docker build -t=daocloud.io/zhaojianhui129/mysql:latest ./mysql/
 ```
 启动MYSQL容器：
 ```sh
@@ -59,9 +62,9 @@ docker run -d -v /mnt/hgfs/GIT/:/www-data/ --name web training/postgres echo Dat
 
 ```sh
 #php7
-docker build -t=zhaojianhui/lnmp:php ./php7fpm/
+docker build -t=daocloud.io/zhaojianhui129/php:fpm ./php7fpm/
 #php5
-docker build -t=zhaojianhui/lnmp:php5 ./php5fpm/
+docker build -t=daocloud.io/zhaojianhui129/php:5-fpm ./php5fpm/
 ```
 
 启动php容器
@@ -84,7 +87,7 @@ docker run --name php5 --volumes-from web --link memcached:memcached -d zhaojian
 > 需要注意的是，我们将fastcgi_pass的值从127.0.0.1:9000改为了phpfpm:9000，这里的phpfpm是域名，在nginx容器的/etc/hosts文件中自动配置为phpfpm容器的访问IP。
 
 ```sh
-docker build -t=zhaojianhui/lnmp:nginx ./nginx/
+docker build -t=daocloud.io/zhaojianhui129/nginx:latest ./nginx/
 ```
 
 ######启动nginx容器：
