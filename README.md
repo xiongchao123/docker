@@ -47,6 +47,11 @@ docker run --name mysql56 -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=test -
 docker run --name memcached -d memcached
 ```
 
+###启动redis容器
+```sh
+docker run --name redis -d -v /data/redis:/data redis 
+```
+
 ####挂载一个主机目录作为代码数据卷容器
 ```sh
 #自己脑洞大开想的，因为ubuntu镜像比较小
@@ -74,8 +79,8 @@ docker run --name php -v /mnt/hgfs/GIT/:/www-data/ -d zhaojianhui/lnmp:php
 ```
 【挂载数据卷容器形式】推荐：
 ```sh
-docker run --name php --volumes-from web -d zhaojianhui/lnmp:php
-docker run --name php5 --volumes-from web -d zhaojianhui/lnmp:php5
+docker run --name php --volumes-from web -d daocloud.io/zhaojianhui129/php:fpm
+docker run --name php --volumes-from web -d daocloud.io/zhaojianhui129/php:5-fpm
 # memcached容器存储session
 docker run --name php5 --volumes-from web --link memcached:memcached -d zhaojianhui/lnmp:php5
 ```
