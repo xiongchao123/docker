@@ -21,6 +21,10 @@ docker加速器
 > redis
 > [英文地址](https://hub.docker.com/_/redis/)
 > 
+> <br>
+> memcached
+> [英文地址](https://hub.docker.com/_/memcached/)
+> 
 
 ####生成mysql镜像部分
 ```sh
