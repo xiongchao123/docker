@@ -37,7 +37,6 @@ RUN apt-get install -y \
     && docker-php-ext-enable phalcon \
     && rm -rf /tmp/phalcon-ext
 
-
 #Add phpredis
 RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git -b php7 /tmp/phpredis-ext \
     && cd /tmp/phpredis-ext \
