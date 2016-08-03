@@ -12,15 +12,22 @@ RUN apt-get update && apt-get install -y \
         libpng12-dev \
         libxml2-dev \
         libfreetype6-dev \
-        libmemcached-dev \
     && docker-php-ext-install -j$(nproc) iconv mcrypt bcmath shmop sysvsem mbstring pcntl sockets xmlrpc simplexml zip soap gettext session opcache \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-freetype-dir \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install mysql mysqli pdo pdo_mysql
 
-#    && pecl install memcached \
-#    && docker-php-ext-enable memcached
+# Add memcached
+RUN apt-get install -y libmemcached-dev \
+        git \
+    && git clone --depth=1 -v https://github.com/php-memcached-dev/php-memcached.git -b master /tmp/memcached-ext \
+    && cd /tmp/memcached-ext \
+    && phpize \
+    && ./configure \
+    && make && make install \
+    && docker-php-ext-enable memcached
 
+# Add phalcon framework
 RUN apt-get install -y \
         git \
     && git clone --depth=1 -v https://github.com/phalcon/cphalcon.git /tmp/phalcon-ext \
@@ -29,21 +36,17 @@ RUN apt-get install -y \
     && docker-php-ext-enable phalcon \
     && rm -rf /tmp/phalcon-ext \
 
-
-#RUN pecl install igbinary \
-#    && docker-php-ext-enable igbinary \
-#    && cp /usr/include/php/ext/igbinary /usr/local/include/php/ext/igbinary -fr
-
 #Add phpredis
-#RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git /tmp/phpredis \
-#    && cd /tmp/phpredis \
-#    && phpize \
-#    && ./configure --enable-redis-igbinary \
-#    && ./configure \
-#    && make && make install \
-#    && docker-php-ext-enable redis
+RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git -b develop /tmp/phpredis \
+    && cd /tmp/phpredis \
+    && phpize \
+    && ./configure \
+    && make && make install \
+#    && mkdir -p /usr/local/etc/php/conf.d/ \
+    && docker-php-ext-enable redis
+
 # remove
-# RUN apt-get autoremove -y git
+RUN apt-get autoremove -y git
 
 # 配置文件更改
 COPY ./conf /usr/local/etc/php

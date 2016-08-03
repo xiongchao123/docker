@@ -17,17 +17,15 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install mysqli pdo pdo_mysql
 
-# RUN apt-get install -y libmemcached-dev \
-#    && pecl install memcached \
-#    && docker-php-ext-enable memcached
-
-# Add installers
-# ADD installers/*.sh /installers/
-
-# RUN apt-get install -y \
-#        git \
-#    && bash /installers/phalcon.sh \
-#    && apt-get autoremove -y git
+# Add memcached
+RUN apt-get install -y libmemcached-dev \
+        git \
+    && git clone --depth=1 -v https://github.com/php-memcached-dev/php-memcached.git -b php7 /tmp/memcached-ext \
+    && cd /tmp/memcached-ext \
+    && phpize \
+    && ./configure \
+    && make && make install \
+    && docker-php-ext-enable memcached
 
 # Add phalcon framework
 RUN apt-get install -y \
@@ -39,21 +37,16 @@ RUN apt-get install -y \
     && rm -rf /tmp/phalcon-ext
 
 
-#RUN pecl install igbinary \
-#    && docker-php-ext-enable igbinary \
-#    && cp /usr/include/php/ext/igbinary /usr/local/include/php/ext/igbinary -fr
-
 #Add phpredis
-#RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git /tmp/phpredis \
-#    && cd /tmp/phpredis \
-#    && phpize \
-#    && ./configure --enable-redis-igbinary \
-#    && ./configure \
-#    && make && make install \
-#    && docker-php-ext-enable redis
+RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git -b php7 /tmp/phpredis \
+    && cd /tmp/phpredis \
+    && phpize \
+    && ./configure \
+    && make && make install \
+    && docker-php-ext-enable redis
 
 # remove
-# RUN apt-get autoremove -y git
+RUN apt-get autoremove -y git
 
 # 配置文件更改
 COPY ./conf /usr/local/etc/php
