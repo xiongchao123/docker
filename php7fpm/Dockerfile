@@ -38,15 +38,11 @@ RUN apt-get install -y \
     && docker-php-ext-enable phalcon \
     && rm -rf /tmp/phalcon-ext
 
-
-RUN pecl install igbinary \
-    && docker-php-ext-enable igbinary
-
 #Add phpredis
 RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git /tmp/phpredis \
     && cd /tmp/phpredis \
     && phpize \
-    && ./configure --enable-redis-igbinary \
+    && ./configure \
     && make && make install \
     && docker-php-ext-enable redis
 
