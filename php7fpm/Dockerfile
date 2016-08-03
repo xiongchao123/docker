@@ -25,7 +25,8 @@ RUN apt-get install -y libmemcached-dev \
     && phpize \
     && ./configure \
     && make && make install \
-    && docker-php-ext-enable memcached
+    && docker-php-ext-enable memcached \
+    && rm -rf /tmp/memcached-ext
 
 # Add phalcon framework
 RUN apt-get install -y \
@@ -38,12 +39,13 @@ RUN apt-get install -y \
 
 
 #Add phpredis
-RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git -b php7 /tmp/phpredis \
-    && cd /tmp/phpredis \
+RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git -b php7 /tmp/phpredis-ext \
+    && cd /tmp/phpredis-ext \
     && phpize \
     && ./configure \
     && make && make install \
-    && docker-php-ext-enable redis
+    && docker-php-ext-enable redis \
+    && rm -rf /tmp/phpredis-ext
 
 # remove
 RUN apt-get autoremove -y git
