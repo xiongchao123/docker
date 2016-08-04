@@ -49,6 +49,10 @@ RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git -b php7 /tmp
 # remove
 RUN apt-get autoremove -y git
 
+# Add composer
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer
+
 # 配置文件更改
 COPY ./conf /usr/local/etc/php
 
