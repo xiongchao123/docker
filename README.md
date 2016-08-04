@@ -51,9 +51,9 @@ docker run --name mysql56 -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=test -
 docker run --name memcached -d memcached
 ```
 
-###启动redis容器
+###启动redis容器,主机6380端口，容器6379
 ```sh
-docker run --name redis -d -v /data/redis:/data redis 
+docker run --name redis -d -v /data/redis:/data -p 6380:6379 redis
 ```
 
 ####挂载一个主机目录作为代码数据卷容器
