@@ -1,7 +1,23 @@
 # docker
 docker学习，新手勿喷
 
-docker加速器
+###docker加速器
+Docker Hub 在国外，有时候拉取 Image 极其缓慢，可以使用国内的镜像来实现加速
+
+####阿里云
+```sh
+echo "DOCKER_OPTS=\"--registry-mirror=https://yourlocation.mirror.aliyuncs.com\"" | sudo tee -a /etc/default/docker
+sudo service docker restart
+```
+> 其中 https://yourlocation.mirror.aliyuncs.com 是您在阿里云注册后的专属加速器地址
+[文档地址](https://yq.aliyun.com/articles/29941)
+
+#### DaoCloud
+```sh
+sudo echo “DOCKER_OPTS=\”\$DOCKER_OPTS –registry-mirror=http://your-id.m.daocloud.io -d\”” >> /etc/default/docker
+sudo service docker restart
+```
+> 其中 http://your-id.m.daocloud.io 是您在 DaoCloud 注册后的专属加速器地址：
 [文档地址](https://www.daocloud.io/mirror#accelerator-doc)
 
 官方仓库地址：
@@ -32,7 +48,7 @@ docker build -t=daocloud.io/zhaojianhui129/mysql:latest ./mysql/
 ```
 启动MYSQL容器：
 ```sh
-docker run --name mysql -v /data/mysql:/var/lib/mysql -p 3306:3306 -d zhaojianhui/lnmp:mysql
+docker run --name mysql -v /data/mysql:/var/lib/mysql -p 3306:3306 -d daocloud.io/zhaojianhui129/mysql:latest
 ```
 //官方原版启动（5.7）
 ```sh
@@ -109,4 +125,11 @@ docker run --name nginx --volumes-from web  -p 80:80 --link php:php --link php5:
 自定义挂载目录，和php的挂载目录保持一致，此方式没有挂载数据卷容器灵活：
 ```sh
 docker run --name nginx -v /mnt/hgfs/GIT/:/www-data/  -p 80:80 -d daocloud.io/zhaojianhui129/nginx:latest
+```
+
+
+####提交镜像到远程仓库
+```sh
+docker push daocloud.io/zhaojianhui129/php:fpm
+
 ```
