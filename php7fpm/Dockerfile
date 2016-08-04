@@ -5,6 +5,7 @@
 
 FROM php:fpm
 
+# init php extension
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
@@ -17,9 +18,11 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install mysqli pdo pdo_mysql
 
+# Add git
+RUN apt-get install -y git
+
 # Add memcached
 RUN apt-get install -y libmemcached-dev \
-        git \
     && git clone --depth=1 -v https://github.com/php-memcached-dev/php-memcached.git -b php7 /tmp/memcached-ext \
     && cd /tmp/memcached-ext \
     && phpize \
@@ -30,14 +33,13 @@ RUN apt-get install -y libmemcached-dev \
 
 # Add phalcon framework
 RUN apt-get install -y \
-        git \
     && git clone --depth=1 -v https://github.com/phalcon/cphalcon.git /tmp/phalcon-ext \
     && cd /tmp/phalcon-ext/build \
     && ./install \
     && docker-php-ext-enable phalcon \
     && rm -rf /tmp/phalcon-ext
 
-#Add phpredis
+# Add phpredis
 RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git -b php7 /tmp/phpredis-ext \
     && cd /tmp/phpredis-ext \
     && phpize \
@@ -46,7 +48,16 @@ RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git -b php7 /tmp
     && docker-php-ext-enable redis \
     && rm -rf /tmp/phpredis-ext
 
-# remove
+# Add swoole
+RUN git clone --depth=1 https://github.com/swoole/swoole-src.git -b master /tmp/swoole-ext \
+    && cd /tmp/swoole-ext \
+    && phpize \
+    && ./configure \
+    && make && make install \
+    && docker-php-ext-enable swoole \
+    && rm -rf /tmp/swoole-ext
+
+# remove git
 RUN apt-get autoremove -y git
 
 # Add composer
