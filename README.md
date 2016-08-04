@@ -69,7 +69,7 @@ docker run --name memcached -p 11211:11211 -d memcached
 
 ###启动redis容器,主机6380端口，容器6379
 ```sh
-docker run --name redis -d -v /data/redis:/data -p 6380:6379 redis
+docker run --name redis -d -v /data/redis:/data -p 6379:6379 redis
 ```
 
 ####挂载一个主机目录作为代码数据卷容器
