@@ -84,7 +84,7 @@ docker run --name php -v /mnt/hgfs/GIT/:/www-data/ -d zhaojianhui/lnmp:php
 【挂载数据卷容器形式】推荐：
 ```sh
 docker run --name php --volumes-from web -d daocloud.io/zhaojianhui129/php:fpm
-docker run --name php --volumes-from web -d daocloud.io/zhaojianhui129/php:5-fpm
+docker run --name php5 --volumes-from web -d daocloud.io/zhaojianhui129/php:5-fpm
 # memcached容器存储session
 docker run --name php5 --volumes-from web --link memcached:memcached -d zhaojianhui/lnmp:php5
 ```
@@ -102,11 +102,11 @@ docker build -t=daocloud.io/zhaojianhui129/nginx:latest ./nginx/
 ######启动nginx容器：
 以php容器的挂载目录为准，挂载同样的目录,使用容器互联的方式，不担心容器IP会变化：
 ```sh
-docker run --name nginx --volumes-from web  -p 80:80 --link php:php --link php5:php5 --link phplaravel:phplaravel -d zhaojianhui/lnmp:nginx
+docker run --name nginx --volumes-from web  -p 80:80 --link php:php --link php5:php5 --link phplaravel:phplaravel -d daocloud.io/zhaojianhui129/nginx:latest
 
-docker run --name nginx --volumes-from web  -p 80:80 --link php:php --link php5:php5 -d zhaojianhui/lnmp:nginx
+docker run --name nginx --volumes-from web  -p 80:80 --link php:php --link php5:php5 -d daocloud.io/zhaojianhui129/nginx:latest
 ```
 自定义挂载目录，和php的挂载目录保持一致，此方式没有挂载数据卷容器灵活：
 ```sh
-docker run --name nginx -v /mnt/hgfs/GIT/:/www-data/  -p 80:80 -d zhaojianhui/lnmp:nginx
+docker run --name nginx -v /mnt/hgfs/GIT/:/www-data/  -p 80:80 -d daocloud.io/zhaojianhui129/nginx:latest
 ```
