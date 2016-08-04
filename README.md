@@ -24,7 +24,7 @@ sudo service docker restart
 原理是找到启动配置文件中的ExecStart那一行，然后在启动参数那里加上registry-mirror参数来切换镜像起到加速的目的。两种方式：
 > 阿里云：https://qqe07tk2.mirror.aliyuncs.com
 > 
-> DaoCloud:http://0752ec30.m.daocloud.io
+> DaoCloud: http://0752ec30.m.daocloud.io
 
 在线执行：
 ```sh
