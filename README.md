@@ -18,7 +18,25 @@ sudo echo “DOCKER_OPTS=\”\$DOCKER_OPTS –registry-mirror=http://your-id.m.d
 sudo service docker restart
 ```
 > 其中 http://your-id.m.daocloud.io 是您在 DaoCloud 注册后的专属加速器地址：
-[文档地址](https://www.daocloud.io/mirror#accelerator-doc)
+[文档地址](https://www.daocloud.io/)
+
+###手动设置加速器
+原理是找到启动配置文件中的ExecStart那一行，然后在启动参数那里加上registry-mirror参数来切换镜像起到加速的目的。两种方式：
+> 阿里云：https://qqe07tk2.mirror.aliyuncs.com
+> DaoCloud:http://0752ec30.m.daocloud.io
+
+在线执行：
+```sh
+curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://0752ec30.m.daocloud.io
+```
+
+手动执行：
+```sh
+sudo cp -bf /lib/systemd/system/docker.service /etc/systemd/system/docker.service
+sudo sed -i "s|ExecStart=/usr/bin/dockerd|ExecStart=/usr/bin/dockerd --registry-mirror=https://qqe07tk2.mirror.aliyuncs.com|g" /etc/systemd/system/docker.service
+sudo systemctl daemon-reload
+sudo service docker restart
+```
 
 官方仓库地址：
 > php           
@@ -44,11 +62,11 @@ sudo service docker restart
 
 ####生成mysql镜像部分
 ```sh
-docker build -t=daocloud.io/zhaojianhui129/mysql:latest ./mysql/
+docker build -t=zhaojianhui129/mysql:latest ./mysql/
 ```
 启动MYSQL容器：
 ```sh
-docker run --name mysql -v /data/mysql:/var/lib/mysql -p 3306:3306 -d daocloud.io/zhaojianhui129/mysql:latest
+docker run --name mysql -v /data/mysql:/var/lib/mysql -p 3306:3306 -d zhaojianhui129/mysql:latest
 ```
 //官方原版启动（5.7）
 ```sh
@@ -69,7 +87,7 @@ docker run --name memcached -p 11211:11211 -d memcached
 
 ###启动redis容器,主机6380端口，容器6379
 ```sh
-docker run --name redis -d -v /data/redis:/data -p 6379:6379 redis
+docker run --name redis -d -v /data/redis:/data -p 6379:6379 redis redis-server --appendonly yes
 ```
 
 ####挂载一个主机目录作为代码数据卷容器
@@ -87,9 +105,9 @@ docker run -d -v /mnt/hgfs/GIT/:/www-data/ --name web training/postgres echo Dat
 
 ```sh
 #php7
-docker build -t=daocloud.io/zhaojianhui129/php:fpm ./php7fpm/
+docker build -t=zhaojianhui129/php:fpm ./php7fpm/
 #php5
-docker build -t=daocloud.io/zhaojianhui129/php:5-fpm ./php5fpm/
+docker build -t=zhaojianhui129/php:5-fpm ./php5fpm/
 ```
 
 启动php容器
@@ -99,8 +117,8 @@ docker run --name php -v /mnt/hgfs/GIT/:/www-data/ -d zhaojianhui/lnmp:php
 ```
 【挂载数据卷容器形式】推荐：
 ```sh
-docker run --name php --volumes-from web -d daocloud.io/zhaojianhui129/php:fpm
-docker run --name php5 --volumes-from web -d daocloud.io/zhaojianhui129/php:5-fpm
+docker run --name php --volumes-from web -d zhaojianhui129/php:fpm
+docker run --name php5 --volumes-from web -d zhaojianhui129/php:5-fpm
 # memcached容器存储session
 docker run --name php5 --volumes-from web --link memcached:memcached -d zhaojianhui/lnmp:php5
 ```
@@ -112,24 +130,24 @@ docker run --name php5 --volumes-from web --link memcached:memcached -d zhaojian
 > 需要注意的是，我们将fastcgi_pass的值从127.0.0.1:9000改为了phpfpm:9000，这里的phpfpm是域名，在nginx容器的/etc/hosts文件中自动配置为phpfpm容器的访问IP。
 
 ```sh
-docker build -t=daocloud.io/zhaojianhui129/nginx:latest ./nginx/
+docker build -t=zhaojianhui129/nginx:latest ./nginx/
 ```
 
 ######启动nginx容器：
 以php容器的挂载目录为准，挂载同样的目录,使用容器互联的方式，不担心容器IP会变化：
 ```sh
-docker run --name nginx --volumes-from web  -p 80:80 --link php:php --link php5:php5 --link phplaravel:phplaravel -d daocloud.io/zhaojianhui129/nginx:latest
+docker run --name nginx --volumes-from web  -p 80:80 --link php:php --link php5:php5 --link phplaravel:phplaravel -d zhaojianhui129/nginx:latest
 
-docker run --name nginx --volumes-from web  -p 80:80 --link php:php --link php5:php5 -d daocloud.io/zhaojianhui129/nginx:latest
+docker run --name nginx --volumes-from web  -p 80:80 --link php:php --link php5:php5 -d zhaojianhui129/nginx:latest
 ```
 自定义挂载目录，和php的挂载目录保持一致，此方式没有挂载数据卷容器灵活：
 ```sh
-docker run --name nginx -v /mnt/hgfs/GIT/:/www-data/  -p 80:80 -d daocloud.io/zhaojianhui129/nginx:latest
+docker run --name nginx -v /mnt/hgfs/GIT/:/www-data/  -p 80:80 -d zhaojianhui129/nginx:latest
 ```
 
 
 ####提交镜像到远程仓库
 ```sh
-docker push daocloud.io/zhaojianhui129/php:fpm
+docker push zhaojianhui129/php:fpm
 
 ```
