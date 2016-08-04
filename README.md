@@ -46,9 +46,9 @@ docker run --name mysql56 -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=test -
 
 新建超级管理员账号查看Dockerfiles信息
 
-####启动memcached容器存储session
+####启动memcached容器存储session，主机端口11211，容器端口11211
 ```sh
-docker run --name memcached -d memcached
+docker run --name memcached -p 11211:11211 -d memcached
 ```
 
 ###启动redis容器,主机6380端口，容器6379
