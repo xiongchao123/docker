@@ -6,7 +6,7 @@
 FROM php:fpm
 
 # init php extension
-RUN apt-get update && apt-get install -y \
+RUN zapt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
@@ -32,8 +32,7 @@ RUN apt-get install -y libmemcached-dev \
     && rm -rf /tmp/memcached-ext
 
 # Add phalcon framework
-RUN apt-get install -y \
-    && git clone --depth=1 -v https://github.com/phalcon/cphalcon.git /tmp/phalcon-ext \
+RUN git clone --depth=1 -v https://github.com/phalcon/cphalcon.git /tmp/phalcon-ext \
     && cd /tmp/phalcon-ext/build \
     && ./install \
     && docker-php-ext-enable phalcon \
@@ -64,12 +63,12 @@ RUN apt-get autoremove -y git
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer
 
-# 配置文件更改
+# 閰嶇疆鏂囦欢鏇存敼
 COPY ./conf /usr/local/etc/php
 
-# 工作目录
-# 拷贝方式
+# 宸ヤ綔鐩綍
+# 鎷疯礉鏂瑰紡
 # COPY static-html-directory /usr/share/nginx/html
 
-# 挂载方式
+# 鎸傝浇鏂瑰紡
 # VOLUME /mnt/hgfs/GIT/ /www-data/
