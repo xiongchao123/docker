@@ -6,7 +6,7 @@
 FROM php:fpm
 
 # init php extension
-RUN zapt-get update && apt-get install -y \
+RUN apt-get clean && apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
