@@ -107,6 +107,7 @@ docker run -d -v /mnt/hgfs/GIT/:/www-data/ --name web training/postgres echo Dat
 ```sh
 #php7
 docker build -t=zhaojianhui129/php:fpm ./php7fpm/
+docker build -t=zhaojianhui129/php:cli ./php7cli/
 #php5
 docker build -t=zhaojianhui129/php:5-fpm ./php5fpm/
 ```
