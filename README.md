@@ -123,7 +123,7 @@ docker run --name php --volumes-from web -d zhaojianhui129/php:fpm
 docker run --name php5 --volumes-from web -d zhaojianhui129/php:5-fpm
 
 #cli模式
-docker run -it --rm --name phpcli -v /mnt/hgfs/GIT/swooletest/:/data/swooletest/ -w /data/swooletest/ zhaojianhui129/php:cli php timerTick.php
+docker run -it --rm --name phpcli -v /mnt/hgfs/GIT/swooletest/:/data/swooletest/ -w /data/swooletest/ -p 9503:9503 zhaojianhui129/php:cli php timerTick.php
 
 # memcached容器存储session
 docker run --name php5 --volumes-from web --link memcached:memcached -d zhaojianhui/lnmp:php5
