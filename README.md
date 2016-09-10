@@ -1,37 +1,37 @@
 # docker
-dockerå­¦ä¹ ï¼Œæ–°æ‰‹å‹¿å–·
+dockerÑ§Ï°£¬ĞÂÊÖÎğÅç
 
-###dockeråŠ é€Ÿå™¨
-Docker Hub åœ¨å›½å¤–ï¼Œæœ‰æ—¶å€™æ‹‰å– Image æå…¶ç¼“æ…¢ï¼Œå¯ä»¥ä½¿ç”¨å›½å†…çš„é•œåƒæ¥å®ç°åŠ é€Ÿ
+###docker¼ÓËÙÆ÷
+Docker Hub ÔÚ¹úÍâ£¬ÓĞÊ±ºòÀ­È¡ Image ¼«Æä»ºÂı£¬¿ÉÒÔÊ¹ÓÃ¹úÄÚµÄ¾µÏñÀ´ÊµÏÖ¼ÓËÙ
 
-####é˜¿é‡Œäº‘
+####°¢ÀïÔÆ
 ```sh
 echo "DOCKER_OPTS=\"--registry-mirror=https://yourlocation.mirror.aliyuncs.com\"" | sudo tee -a /etc/default/docker
 sudo service docker restart
 ```
-> å…¶ä¸­ https://yourlocation.mirror.aliyuncs.com æ˜¯æ‚¨åœ¨é˜¿é‡Œäº‘æ³¨å†Œåçš„ä¸“å±åŠ é€Ÿå™¨åœ°å€
-[æ–‡æ¡£åœ°å€](https://yq.aliyun.com/articles/29941)
+> ÆäÖĞ https://yourlocation.mirror.aliyuncs.com ÊÇÄúÔÚ°¢ÀïÔÆ×¢²áºóµÄ×¨Êô¼ÓËÙÆ÷µØÖ·
+[ÎÄµµµØÖ·](https://yq.aliyun.com/articles/29941)
 
 #### DaoCloud
 ```sh
-sudo echo â€œDOCKER_OPTS=\â€\$DOCKER_OPTS â€“registry-mirror=http://your-id.m.daocloud.io -d\â€â€ >> /etc/default/docker
+sudo echo ¡°DOCKER_OPTS=\¡±\$DOCKER_OPTS ¨Cregistry-mirror=http://your-id.m.daocloud.io -d\¡±¡± >> /etc/default/docker
 sudo service docker restart
 ```
-> å…¶ä¸­ http://your-id.m.daocloud.io æ˜¯æ‚¨åœ¨ DaoCloud æ³¨å†Œåçš„ä¸“å±åŠ é€Ÿå™¨åœ°å€ï¼š
-[æ–‡æ¡£åœ°å€](https://www.daocloud.io/)
+> ÆäÖĞ http://your-id.m.daocloud.io ÊÇÄúÔÚ DaoCloud ×¢²áºóµÄ×¨Êô¼ÓËÙÆ÷µØÖ·£º
+[ÎÄµµµØÖ·](https://www.daocloud.io/)
 
-###æ‰‹åŠ¨è®¾ç½®åŠ é€Ÿå™¨
-åŸç†æ˜¯æ‰¾åˆ°å¯åŠ¨é…ç½®æ–‡ä»¶ä¸­çš„ExecStarté‚£ä¸€è¡Œï¼Œç„¶ååœ¨å¯åŠ¨å‚æ•°é‚£é‡ŒåŠ ä¸Šregistry-mirrorå‚æ•°æ¥åˆ‡æ¢é•œåƒèµ·åˆ°åŠ é€Ÿçš„ç›®çš„ã€‚ä¸¤ç§æ–¹å¼ï¼š
-> é˜¿é‡Œäº‘ï¼šhttps://qqe07tk2.mirror.aliyuncs.com
+###ÊÖ¶¯ÉèÖÃ¼ÓËÙÆ÷
+Ô­ÀíÊÇÕÒµ½Æô¶¯ÅäÖÃÎÄ¼şÖĞµÄExecStartÄÇÒ»ĞĞ£¬È»ºóÔÚÆô¶¯²ÎÊıÄÇÀï¼ÓÉÏregistry-mirror²ÎÊıÀ´ÇĞ»»¾µÏñÆğµ½¼ÓËÙµÄÄ¿µÄ¡£Á½ÖÖ·½Ê½£º
+> °¢ÀïÔÆ£ºhttps://qqe07tk2.mirror.aliyuncs.com
 > 
 > DaoCloud: http://0752ec30.m.daocloud.io
 
-åœ¨çº¿æ‰§è¡Œï¼š
+ÔÚÏßÖ´ĞĞ£º
 ```sh
 curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://0752ec30.m.daocloud.io
 ```
 
-æ‰‹åŠ¨æ‰§è¡Œï¼š
+ÊÖ¶¯Ö´ĞĞ£º
 ```sh
 sudo cp -bf /lib/systemd/system/docker.service /etc/systemd/system/docker.service
 sudo sed -i "s|ExecStart=/usr/bin/dockerd|ExecStart=/usr/bin/dockerd --registry-mirror=https://qqe07tk2.mirror.aliyuncs.com|g" /etc/systemd/system/docker.service
@@ -39,69 +39,75 @@ sudo systemctl daemon-reload
 sudo service docker restart
 ```
 
-å®˜æ–¹ä»“åº“åœ°å€ï¼š
+####ÅúÁ¿É¾³ı¾µÏñ
+ÏÈrunÒ»ÏÂ£º docker images | grep "^" | awk "{print $3}"£¬ ¿´¿´ÊÇ²»ÊÇÈ·ÊµÓĞ  µÄimage£¬Èç¹ûÃ»ÓĞ£¬Ö±½ÓÔËĞĞ»áÓĞÄãÏÖÔÚµÄÎÊÌâ¡£
+```sh
+docker rmi $(docker images | grep "^" | awk "{print $3}")
+```
+
+¹Ù·½²Ö¿âµØÖ·£º
 > php           
-> [è‹±æ–‡åœ°å€](https://hub.docker.com/_/php/)              
-> [ä¸­æ–‡åœ°å€](https://github.com/DaoCloud/library-image/tree/master/php)
+> [Ó¢ÎÄµØÖ·](https://hub.docker.com/_/php/)              
+> [ÖĞÎÄµØÖ·](https://github.com/DaoCloud/library-image/tree/master/php)
 > <br>
 > mysql     
-> [è‹±æ–‡åœ°å€](https://hub.docker.com/_/mysql/)         
-> [ä¸­æ–‡åœ°å€](https://github.com/DaoCloud/library-image/tree/master/mysql)
+> [Ó¢ÎÄµØÖ·](https://hub.docker.com/_/mysql/)         
+> [ÖĞÎÄµØÖ·](https://github.com/DaoCloud/library-image/tree/master/mysql)
 > <br>
 > nginx       
-> [è‹±æ–‡åœ°å€](https://hub.docker.com/_/nginx/)          
-> [ä¸­æ–‡åœ°å€](https://github.com/DaoCloud/library-image/tree/master/nginx)
+> [Ó¢ÎÄµØÖ·](https://hub.docker.com/_/nginx/)          
+> [ÖĞÎÄµØÖ·](https://github.com/DaoCloud/library-image/tree/master/nginx)
 > 
 > <br>
 > redis       
-> [è‹±æ–‡åœ°å€](https://hub.docker.com/_/redis/)
+> [Ó¢ÎÄµØÖ·](https://hub.docker.com/_/redis/)
 > 
 > <br>
 > memcached       
-> [è‹±æ–‡åœ°å€](https://hub.docker.com/_/memcached/)
+> [Ó¢ÎÄµØÖ·](https://hub.docker.com/_/memcached/)
 > 
 
-####ç”Ÿæˆmysqlé•œåƒéƒ¨åˆ†
+####Éú³Émysql¾µÏñ²¿·Ö
 ```sh
 docker build -t=zhaojianhui129/mysql:latest ./mysql/
 ```
-å¯åŠ¨MYSQLå®¹å™¨ï¼š
+Æô¶¯MYSQLÈİÆ÷£º
 ```sh
 docker run --name mysql -v /data/mysql:/var/lib/mysql -p 3306:3306 -d zhaojianhui129/mysql:latest
 ```
-//å®˜æ–¹åŸç‰ˆå¯åŠ¨ï¼ˆ5.7ï¼‰
+//¹Ù·½Ô­°æÆô¶¯£¨5.7£©
 ```sh
 docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=test -e MYSQL_USER=qianxun -e MYSQL_PASSWORD=123456 -v /data/mysql:/var/lib/mysql -p 3306:3306 -d mysql
 ```
 
-//å®˜æ–¹åŸæœ¬å¯åŠ¨ï¼ˆ5.6ï¼‰
+//¹Ù·½Ô­±¾Æô¶¯£¨5.6£©
 ```sh
 docker run --name mysql56 -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=test -e MYSQL_USER=qianxun -e MYSQL_PASSWORD=123456 -v /data/mysql56:/var/lib/mysql -p 3307:3306 -d mysql:5.6
 ```
 
-æ–°å»ºè¶…çº§ç®¡ç†å‘˜è´¦å·æŸ¥çœ‹Dockerfilesä¿¡æ¯
+ĞÂ½¨³¬¼¶¹ÜÀíÔ±ÕËºÅ²é¿´DockerfilesĞÅÏ¢
 
-####å¯åŠ¨memcachedå®¹å™¨å­˜å‚¨sessionï¼Œä¸»æœºç«¯å£11211ï¼Œå®¹å™¨ç«¯å£11211
+####Æô¶¯memcachedÈİÆ÷´æ´¢session£¬Ö÷»ú¶Ë¿Ú11211£¬ÈİÆ÷¶Ë¿Ú11211
 ```sh
 docker run --name memcached -p 11211:11211 -d memcached
 ```
 
-###å¯åŠ¨rediså®¹å™¨,ä¸»æœº6379ç«¯å£ï¼Œå®¹å™¨6379
+###Æô¶¯redisÈİÆ÷,Ö÷»ú6379¶Ë¿Ú£¬ÈİÆ÷6379
 ```sh
 docker run --name redis -d -v /data/redis:/data -p 6379:6379 redis redis-server --appendonly yes
 ```
 
-####æŒ‚è½½ä¸€ä¸ªä¸»æœºç›®å½•ä½œä¸ºä»£ç æ•°æ®å·å®¹å™¨
+####¹ÒÔØÒ»¸öÖ÷»úÄ¿Â¼×÷Îª´úÂëÊı¾İ¾íÈİÆ÷
 ```sh
-#è‡ªå·±è„‘æ´å¤§å¼€æƒ³çš„ï¼Œå› ä¸ºubuntué•œåƒæ¯”è¾ƒå°
+#×Ô¼ºÄÔ¶´´ó¿ªÏëµÄ£¬ÒòÎªubuntu¾µÏñ±È½ÏĞ¡
 docker run -d -v /mnt/hgfs/website/:/www-data/ --name web ubuntu echo Data-only container for postgres
-#æ‰‹å†Œä¸Šæ–°å»ºæ•°æ®å·å®¹å™¨
+#ÊÖ²áÉÏĞÂ½¨Êı¾İ¾íÈİÆ÷
 docker run -d -v /mnt/hgfs/GIT/:/www-data/ --name web training/postgres echo Data-only container for postgres
 ```
 
 
-####ç”Ÿæˆphpé•œåƒéƒ¨åˆ†
-> æœ‰æ•ˆçš„phpæ‰©å±•åˆ—è¡¨ä¸º:
+####Éú³Éphp¾µÏñ²¿·Ö
+> ÓĞĞ§µÄphpÀ©Õ¹ÁĞ±íÎª:
 > bcmath bz2 calendar ctype curl dba dom enchant exif fileinfo filter ftp gd gettext gmp hash iconv imap interbase intl json ldap mbstring mcrypt mysqli oci8 odbc opcache pcntl pdo pdo_dblib pdo_firebird pdo_mysql pdo_oci pdo_odbc pdo_pgsql pdo_sqlite pgsql phar posix pspell readline recode reflection session shmop simplexml snmp soap sockets spl standard sysvmsg sysvsem sysvshm tidy tokenizer wddx xml xmlreader xmlrpc xmlwriter xsl zip
 
 ```sh
@@ -112,47 +118,47 @@ docker build -t=zhaojianhui129/php:cli ./php7cli/
 docker build -t=zhaojianhui129/php:5-fpm ./php5fpm/
 ```
 
-å¯åŠ¨phpå®¹å™¨
-ã€æŒ‚è½½ä¸»æœºç›®å½•å½¢å¼ã€‘ï¼Œä¸æ¨è
+Æô¶¯phpÈİÆ÷
+¡¾¹ÒÔØÖ÷»úÄ¿Â¼ĞÎÊ½¡¿£¬²»ÍÆ¼ö
 ```sh
 docker run --name php -v /mnt/hgfs/GIT/:/www-data/ -d zhaojianhui/lnmp:php
 ```
-ã€æŒ‚è½½æ•°æ®å·å®¹å™¨å½¢å¼ã€‘æ¨èï¼š
+¡¾¹ÒÔØÊı¾İ¾íÈİÆ÷ĞÎÊ½¡¿ÍÆ¼ö£º
 ```sh
 docker run --name php --volumes-from web -d zhaojianhui129/php:fpm
 docker run --name php5 --volumes-from web -d zhaojianhui129/php:5-fpm
 
-#cliæ¨¡å¼
+#cliÄ£Ê½
 docker run -it --rm --name phpcli -v /mnt/hgfs/GIT/swooletest/:/data/swooletest/ -w /data/swooletest/ -p 9503:9503 zhaojianhui129/php:cli php timerTick.php
 
-# memcachedå®¹å™¨å­˜å‚¨session
+# memcachedÈİÆ÷´æ´¢session
 docker run --name php5 --volumes-from web --link memcached:memcached -d zhaojianhui/lnmp:php5
 ```
 
 
-####ç”Ÿæˆnginxé•œåƒéƒ¨åˆ†
-ä½¿ç”¨docker-ipæŸ¥çœ‹phpå®¹å™¨çš„ipåœ°å€ï¼Œç„¶åé…ç½®å¥½./nginx/vhostsç›®å½•ä¸‹çš„é…ç½®æ–‡ä»¶ï¼Œç„¶åç”Ÿæˆè‡ªå®šä¹‰å®¹å™¨ï¼Œå¦‚ä¸‹;
-> æ³¨æ„nginxé…ç½®æ–‡ä»¶çš„fastcgi_passå‚æ•°éƒ¨åˆ†ï¼Œå·²ç»æ”¹ä¸ºäº†phpå®¹å™¨åç§°ï¼Œä½¿ç”¨æ­¤æ–¹æ³•å¯ä»¥ä¸ç”¨æ‹…å¿ƒå®¹å™¨ipéšæ—¶åˆ‡æ¢çš„é—®é¢˜ã€‚
-> éœ€è¦æ³¨æ„çš„æ˜¯ï¼Œæˆ‘ä»¬å°†fastcgi_passçš„å€¼ä»127.0.0.1:9000æ”¹ä¸ºäº†phpfpm:9000ï¼Œè¿™é‡Œçš„phpfpmæ˜¯åŸŸåï¼Œåœ¨nginxå®¹å™¨çš„/etc/hostsæ–‡ä»¶ä¸­è‡ªåŠ¨é…ç½®ä¸ºphpfpmå®¹å™¨çš„è®¿é—®IPã€‚
+####Éú³Énginx¾µÏñ²¿·Ö
+Ê¹ÓÃdocker-ip²é¿´phpÈİÆ÷µÄipµØÖ·£¬È»ºóÅäÖÃºÃ./nginx/vhostsÄ¿Â¼ÏÂµÄÅäÖÃÎÄ¼ş£¬È»ºóÉú³É×Ô¶¨ÒåÈİÆ÷£¬ÈçÏÂ;
+> ×¢ÒânginxÅäÖÃÎÄ¼şµÄfastcgi_pass²ÎÊı²¿·Ö£¬ÒÑ¾­¸ÄÎªÁËphpÈİÆ÷Ãû³Æ£¬Ê¹ÓÃ´Ë·½·¨¿ÉÒÔ²»ÓÃµ£ĞÄÈİÆ÷ipËæÊ±ÇĞ»»µÄÎÊÌâ¡£
+> ĞèÒª×¢ÒâµÄÊÇ£¬ÎÒÃÇ½«fastcgi_passµÄÖµ´Ó127.0.0.1:9000¸ÄÎªÁËphpfpm:9000£¬ÕâÀïµÄphpfpmÊÇÓòÃû£¬ÔÚnginxÈİÆ÷µÄ/etc/hostsÎÄ¼şÖĞ×Ô¶¯ÅäÖÃÎªphpfpmÈİÆ÷µÄ·ÃÎÊIP¡£
 
 ```sh
 docker build -t=zhaojianhui129/nginx:latest ./nginx/
 ```
 
-######å¯åŠ¨nginxå®¹å™¨ï¼š
-ä»¥phpå®¹å™¨çš„æŒ‚è½½ç›®å½•ä¸ºå‡†ï¼ŒæŒ‚è½½åŒæ ·çš„ç›®å½•,ä½¿ç”¨å®¹å™¨äº’è”çš„æ–¹å¼ï¼Œä¸æ‹…å¿ƒå®¹å™¨IPä¼šå˜åŒ–ï¼š
+######Æô¶¯nginxÈİÆ÷£º
+ÒÔphpÈİÆ÷µÄ¹ÒÔØÄ¿Â¼Îª×¼£¬¹ÒÔØÍ¬ÑùµÄÄ¿Â¼,Ê¹ÓÃÈİÆ÷»¥ÁªµÄ·½Ê½£¬²»µ£ĞÄÈİÆ÷IP»á±ä»¯£º
 ```sh
 docker run --name nginx --volumes-from web  -p 80:80 --link php:php --link php5:php5 --link phplaravel:phplaravel -d zhaojianhui129/nginx:latest
 
 docker run --name nginx --volumes-from web  -p 80:80 --link php:php --link php5:php5 -d zhaojianhui129/nginx:latest
 ```
-è‡ªå®šä¹‰æŒ‚è½½ç›®å½•ï¼Œå’Œphpçš„æŒ‚è½½ç›®å½•ä¿æŒä¸€è‡´ï¼Œæ­¤æ–¹å¼æ²¡æœ‰æŒ‚è½½æ•°æ®å·å®¹å™¨çµæ´»ï¼š
+×Ô¶¨Òå¹ÒÔØÄ¿Â¼£¬ºÍphpµÄ¹ÒÔØÄ¿Â¼±£³ÖÒ»ÖÂ£¬´Ë·½Ê½Ã»ÓĞ¹ÒÔØÊı¾İ¾íÈİÆ÷Áé»î£º
 ```sh
 docker run --name nginx -v /mnt/hgfs/GIT/:/www-data/  -p 80:80 -d zhaojianhui129/nginx:latest
 ```
 
 
-####æäº¤é•œåƒåˆ°è¿œç¨‹ä»“åº“
+####Ìá½»¾µÏñµ½Ô¶³Ì²Ö¿â
 ```sh
 docker push zhaojianhui129/php:fpm
 

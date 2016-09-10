@@ -37,6 +37,7 @@ RUN apt-get install -y libmemcached-dev \
 # Add phalcon framework
 RUN git clone --depth=1 -v https://github.com/phalcon/cphalcon.git /tmp/phalcon-ext \
     && cd /tmp/phalcon-ext/build \
+    && export CFLAGS="-O2 -finline-functions -fvisibility=hidden" \
     && ./install \
     && docker-php-ext-enable phalcon \
     && rm -rf /tmp/phalcon-ext
