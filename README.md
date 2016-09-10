@@ -136,6 +136,7 @@ docker run --name php5 --volumes-from web --link memcached:memcached --link mysq
 ```
 
 
+
 ####生成nginx镜像部分
 使用docker-ip查看php容器的ip地址，然后配置好./nginx/vhosts目录下的配置文件，然后生成自定义容器，如下;
 > 注意nginx配置文件的fastcgi_pass参数部分，已经改为了php容器名称，使用此方法可以不用担心容器ip随时切换的问题。
