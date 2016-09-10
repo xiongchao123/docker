@@ -129,7 +129,7 @@ docker run --name php --volumes-from web --link redis:redis --link mysql:mysql -
 docker run --name php5 --volumes-from web --link redis:redis --link mysql:mysql -d zhaojianhui129/php:5-fpm
 
 #cliÄ£Ê½
-docker run -it --rm --name phpcli -v /mnt/hgfs/GIT/swooletest/:/data/swooletest/ -w /data/swooletest/ -p 9503:9503 zhaojianhui129/php:cli php timerTick.php
+docker run -it --rm --name phpcli -v /mnt/hgfs/GIT/swooletest/:/data/swooletest/ -w /data/swooletest/ --link redis:redis --link mysql:mysql -p 9503:9503 zhaojianhui129/php:cli php timerTick.php
 
 # memcachedÈÝÆ÷´æ´¢session
 docker run --name php5 --volumes-from web --link memcached:memcached -d zhaojianhui/lnmp:php5
