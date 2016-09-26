@@ -125,11 +125,11 @@ docker run --name php -v /mnt/hgfs/GIT/:/www-data/ -d zhaojianhui/lnmp:php
 ```
 【挂载数据卷容器形式】推荐：
 ```sh
-docker run --name php --volumes-from web --link redis:redis --link mysql:mysql -d zhaojianhui129/php:fpm
-docker run --name php5 --volumes-from web --link redis:redis --link mysql:mysql -d zhaojianhui129/php:5-fpm
+docker run --name php --volumes-from web --link redis:redis_server --link mysql:mysql -d zhaojianhui129/php:fpm
+docker run --name php5 --volumes-from web --link redis:redis_server --link mysql:mysql -d zhaojianhui129/php:5-fpm
 
 #cli模式
-docker run -it --rm --name phpcli -v /mnt/hgfs/GIT/swooletest/:/data/swooletest/ -w /data/swooletest/ --link redis:redis --link mysql:mysql -p 9503:9503 zhaojianhui129/php:cli php timerTick.php
+docker run -it --rm --name phpcli -v /mnt/hgfs/GIT/swooletest/:/data/swooletest/ -w /data/swooletest/ --link redis:redis_server --link mysql:mysql -p 9503:9503 zhaojianhui129/php:cli php timerTick.php
 
 # memcached容器存储session
 docker run --name php5 --volumes-from web --link memcached:memcached --link mysql:mysql -d zhaojianhui/lnmp:php5
@@ -149,7 +149,7 @@ docker build -t=zhaojianhui129/nginx:latest ./nginx/
 ######启动nginx容器：
 以php容器的挂载目录为准，挂载同样的目录,使用容器互联的方式，不担心容器IP会变化：
 ```sh
-docker run --name nginx --volumes-from web -p 80:80 --link php:php --link php5:php5 -d zhaojianhui129/nginx:latest
+docker run --name nginx --volumes-from web -p 80:80 --link php:php_server --link php5:php5_server -d zhaojianhui129/nginx:latest
 ```
 自定义挂载目录，和php的挂载目录保持一致，此方式没有挂载数据卷容器灵活：
 ```sh
