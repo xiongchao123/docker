@@ -20,6 +20,7 @@ sudo service docker restart
 > 其中 http://your-id.m.daocloud.io 是您在 DaoCloud 注册后的专属加速器地址：
 [文档地址](https://www.daocloud.io/)
 
+
 ###手动设置加速器
 原理是找到启动配置文件中的ExecStart那一行，然后在启动参数那里加上registry-mirror参数来切换镜像起到加速的目的。两种方式：
 > 阿里云：https://qqe07tk2.mirror.aliyuncs.com
