@@ -1,7 +1,9 @@
 ubuntu下安装docker方法：
+https://github.com/widuu/chinese_docker/blob/master/installation/ubuntu.md
 https://docs.docker.com/engine/installation/linux/ubuntulinux/
 
 ###解决ubuntu下docker容器dns解析慢的问题:
+方法一:
 ```sh
 #首先查看系统dns设置,找到本机dns地址
 sudo gedit /etc/default/docker
@@ -13,3 +15,14 @@ systemctl restart docker
 sudo service docker restart
 #然后启动docker容器
 ```
+
+方法二:
+```sh
+sudo apt-get install bridge-utils
+pkill docker
+iptables -t nat -F
+ifconfig docker0 down
+brctl delbr docker0
+sudo service docker start
+```
+然后重建镜像
