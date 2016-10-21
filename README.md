@@ -126,7 +126,7 @@ docker run --name php -v /mnt/hgfs/GIT/:/www-data/ -d zhaojianhui/lnmp:php
 ```
 【挂载数据卷容器形式】推荐：
 ```sh
-docker run --name php --volumes-from web --link redis:redis_server --link mysql:mysql_server -d zhaojianhui129/php:fpm
+docker run --name php --volumes-from web --link redis:redis_server --link mysql:mysql_server --dns=192.168.10.1 --dns=8.8.8.8 -d zhaojianhui129/php:fpm
 docker run --name php5 --volumes-from web --link redis:redis_server --link mysql:mysql_server -d zhaojianhui129/php:5-fpm
 
 #cli模式
