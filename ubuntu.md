@@ -1,5 +1,5 @@
 ubuntu下安装docker方法：
-https://github.com/widuu/chinese_docker/blob/master/installation/ubuntu.md
+http://www.cnblogs.com/ola2010/p/5524826.html
 https://docs.docker.com/engine/installation/linux/ubuntulinux/
 
 ###解决ubuntu下docker容器dns解析慢的问题:
