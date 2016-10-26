@@ -40,6 +40,12 @@ sudo systemctl daemon-reload
 sudo service docker restart
 ```
 
+###安装docker工具
+```sh
+$ wget -P ~ https://github.com/yeasy/docker_practice/raw/master/_local/.bashrc_docker;
+$ echo "[ -f ~/.bashrc_docker ] && . ~/.bashrc_docker" >> ~/.bashrc; source ~/.bashrc
+```
+
 ####批量删除镜像
 先run一下： docker images | grep "^" | awk "{print $3}"， 看看是不是确实有  的image，如果没有，直接运行会有你现在的问题。
 ```sh

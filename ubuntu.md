@@ -26,3 +26,8 @@ brctl delbr docker0
 sudo service docker start
 ```
 然后重建镜像
+
+所以，需要将当前用户加入到组docker下，该组是在安装docker的时候自动建立的。
+
+$ sudo usermod -aG docker ubuntu
+
