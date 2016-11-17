@@ -76,11 +76,17 @@ docker rmi $(docker images | grep "^" | awk "{print $3}")
 
 ####生成mysql镜像部分
 ```sh
+//mysql5.7
 docker build -t=zhaojianhui129/mysql:latest ./mysql/
+//mysql8
+docker build -t=zhaojianhui129/mysql:8 ./mysql8/
 ```
 启动MYSQL容器：
 ```sh
+//mysql5.7
 docker run --name mysql -v /data/mysql:/var/lib/mysql -p 3306:3306 -d zhaojianhui129/mysql:latest
+//mysql8
+docker run --name mysql -v /data/mysql:/var/lib/mysql -p 3306:3306 -d zhaojianhui129/mysql:8 --character-set-server=utf8 --collation-server=utf8_general_ci
 ```
 //官方原版启动（5.7）
 ```sh
