@@ -141,6 +141,8 @@ docker build -t=zhaojianhui129/php:5-fpm ./php5fpm/
 【挂载主机目录形式】，不推荐
 ```sh
 docker run --name php -v /mnt/hgfs/GIT/:/www-data/ -d zhaojianhui/lnmp:php
+
+docker run --name php5 -v /home/qianxun/website/dflpvmkt/:/home/qianxun/website/dflpvmkt/ -d zhaojianhui129/php:5-fpm
 ```
 【挂载数据卷容器形式】推荐：
 ```sh
