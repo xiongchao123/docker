@@ -20,6 +20,15 @@ $ sudo apt update
 ```sh
 $ sudo apt install docker-engine
 ```
+
+##更改仓库(加速)
+```sh
+sudo cp -bf /lib/systemd/system/docker.service /etc/systemd/system/docker.service
+sudo sed -i "s|ExecStart=/usr/bin/dockerd|ExecStart=/usr/bin/dockerd --registry-mirror=https://qqe07tk2.mirror.aliyuncs.com|g" /etc/systemd/system/docker.service
+sudo systemctl daemon-reload
+sudo service docker restart
+```
+
 启动与测试
 ```sh
 $ sudo service docker start 
