@@ -67,12 +67,40 @@ https://hub.docker.com/explore/
 > [中文地址](https://github.com/DaoCloud/library-image/tree/master/nginx)
 > 
 > <br>
+> mariadb
+> [英文地址](https://hub.docker.com/_/mariadb/)
+>
+> <br>
 > redis       
 > [英文地址](https://hub.docker.com/_/redis/)
 > 
 > <br>
+> mongo
+> [英文地址](https://hub.docker.com/_/mongo/)
+> [中文地址](https://github.com/DaoCloud/library-image/tree/master/mongo)
+> 
+> <br>
 > memcached       
 > [英文地址](https://hub.docker.com/_/memcached/)
+> 
+> <br>
+> rabbitmq
+> [英文地址](https://hub.docker.com/_/rabbitmq/)
+> [中文地址](https://github.com/DaoCloud/library-image/tree/master/rabbitmq)
+> 
+> <br>
+> composer
+> [英文地址]（https://hub.docker.com/_/composer/）
+> 
+> <br>
+> ubuntu
+> [英文地址](https://hub.docker.com/_/ubuntu/)
+> [中文地址](https://github.com/DaoCloud/library-image/tree/master/ubuntu)
+> 
+> <br>
+> centos
+> [英文地址](https://hub.docker.com/_/centos/)
+> [中文地址](https://github.com/DaoCloud/library-image/tree/master/centos)
 > 
 
 ####生成mysql镜像部分
