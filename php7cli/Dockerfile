@@ -8,9 +8,7 @@ FROM php:7.0-cli
 #ARG APT_MIRROR=httpredir.debian.org
 
 # init php extension
-RUN apt-get clean && apt-get update
-
-RUN apt-get update && apt-get install -y \
+RUN apt-get clean && apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \

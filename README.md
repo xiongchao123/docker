@@ -51,6 +51,18 @@ $ echo "[ -f ~/.bashrc_docker ] && . ~/.bashrc_docker" >> ~/.bashrc; source ~/.b
 ```sh
 docker rmi $(docker images | grep "^" | awk "{print $3}")
 ```
+####1、停用全部运行中的容器:
+```sh
+docker stop $(docker ps -q)
+```
+####2、删除全部容器：
+```sh
+docker rm $(docker ps -aq)
+```
+####3、一条命令实现停用并删除容器：
+```sh
+docker stop $(docker ps -q) & docker rm $(docker ps -aq)
+```
 
 #设定镜像下载源
 ```sh
@@ -97,7 +109,7 @@ https://hub.docker.com/explore/
 > 
 > <br>
 > composer
-> [英文地址]（https://hub.docker.com/_/composer/）
+> [英文地址](https://hub.docker.com/_/composer/)
 > 
 > <br>
 > ubuntu
@@ -217,5 +229,19 @@ docker run --name nginx -v /mnt/hgfs/GIT/:/www-data/  -p 80:80 -d zhaojianhui129
 ####提交镜像到远程仓库
 ```sh
 docker push zhaojianhui129/php:fpm
+```
+###命令集合
+```sh
+docker build -t=zhaojianhui129/mysql:8 ./mysql8/
+docker build -t=zhaojianhui129/php:fpm ./php7fpm/
+docker build -t=zhaojianhui129/php:cli ./php7cli/
+docker build -t=zhaojianhui129/php:5-fpm ./php5fpm/
+docker build -t=zhaojianhui129/nginx:latest ./nginx/
 
+docker run -d -v /home/qianxun/website/:/www-data/ --name web ubuntu echo Data-only container for postgres
+docker run --name memcached -p 11211:11211 -d memcached
+docker run --name redis -d -v /data/redis:/data -p 6379:6379 redis redis-server --appendonly yes
+docker run --name mysql -v /data/mysql:/var/lib/mysql -p 3306:3306 -d zhaojianhui129/mysql:8 --character-set-server=utf8 --collation-server=utf8_general_ci
+docker run --name php --volumes-from web --link redis:redis_server --link mysql:mysql_server -d zhaojianhui129/php:fpm
+docker run --name nginx --volumes-from web --link php:php_server -d zhaojianhui129/nginx:latest
 ```
