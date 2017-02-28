@@ -3,7 +3,7 @@
 # Author: zhaojianhui
 # Command format: Instruction [arguments / command] ..
 
-FROM php:zts
+FROM php:7.0-zts
 
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \

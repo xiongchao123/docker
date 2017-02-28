@@ -3,19 +3,17 @@
 # Author: zhaojianhui
 # Command format: Instruction [arguments / command] ..
 
-FROM php:cli
+FROM php:7.0-cli
 
 #ARG APT_MIRROR=httpredir.debian.org
-RUN echo "deb http://mirrors.163.com/debian/ jessie main non-free contrib\ndeb http://mirrors.163.com/debian/ jessie-updates main non-free contrib\ndeb http://mirrors.163.com/debian/ jessie-backports main non-free contrib\ndeb-src http://mirrors.163.com/debian/ jessie main non-free contrib\ndeb-src http://mirrors.163.com/debian/ jessie-updates main non-free contrib\ndeb-src http://mirrors.163.com/debian/ jessie-backports main non-free contrib\ndeb http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib\ndeb-src http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib" | tee /etc/apt/sources.list
+RUN echo "deb http://mirrors.aliyun.com/debian wheezy main contrib non-free\ndeb-src http://mirrors.aliyun.com/debian wheezy main contrib non-free\ndeb http://mirrors.aliyun.com/debian wheezy-updates main contrib non-free\ndeb-src http://mirrors.aliyun.com/debian wheezy-updates main contrib non-free\ndeb http://mirrors.aliyun.com/debian-security wheezy/updates main contrib non-free\ndeb-src http://mirrors.aliyun.com/debian-security wheezy/updates main contrib non-free" | tee /etc/apt/sources.list
 
 # init php extension
 RUN apt-get clean && apt-get update && apt-get install -y \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
+        libfreetype6 \
+        libjpeg62 \
         libmcrypt-dev \
-        libpng12-dev \
-        libxml2-dev \
-        libfreetype6-dev \
+        libpng12 \
     && docker-php-ext-install -j$(nproc) iconv mcrypt bcmath shmop sysvsem mbstring pcntl sockets xmlrpc simplexml zip soap gettext session opcache \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-freetype-dir \
     && docker-php-ext-install -j$(nproc) gd \
@@ -26,7 +24,7 @@ RUN apt-get install -y git
 
 # Add memcached
 RUN apt-get install -y libmemcached-dev \
-    && git clone --depth=1 -v https://github.com/php-memcached-dev/php-memcached.git -b php7 /tmp/memcached-ext \
+    && git clone --depth=1 -v https://github.com/php-memcached-dev/php-memcached.git /tmp/memcached-ext \
     && cd /tmp/memcached-ext \
     && phpize \
     && ./configure \
@@ -37,7 +35,6 @@ RUN apt-get install -y libmemcached-dev \
 # Add phalcon framework
 RUN git clone --depth=1 -v https://github.com/phalcon/cphalcon.git /tmp/phalcon-ext \
     && cd /tmp/phalcon-ext/build \
-    && export CFLAGS="-O2 -finline-functions -fvisibility=hidden" \
     && ./install \
     && docker-php-ext-enable phalcon \
     && rm -rf /tmp/phalcon-ext
@@ -52,7 +49,7 @@ RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git /tmp/phpredi
     && rm -rf /tmp/phpredis-ext
 
 # Add swoole
-RUN git clone --depth=1 https://github.com/swoole/swoole-src.git -b master /tmp/swoole-ext \
+RUN git clone --depth=1 git@git.oschina.net:swoole/swoole.git /tmp/swoole-ext \
     && cd /tmp/swoole-ext \
     && phpize \
     && ./configure \
