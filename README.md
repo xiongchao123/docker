@@ -24,7 +24,7 @@ sudo service docker restart
 ###手动设置加速器
 原理是找到启动配置文件中的ExecStart那一行，然后在启动参数那里加上registry-mirror参数来切换镜像起到加速的目的。两种方式：
 > 阿里云：https://qqe07tk2.mirror.aliyuncs.com
-> 
+>
 > DaoCloud: http://0752ec30.m.daocloud.io
 
 在线执行：
@@ -73,54 +73,54 @@ RUN echo "deb http://mirrors.163.com/debian/ jessie main non-free contrib\ndeb h
 
 官方仓库地址：
 https://hub.docker.com/explore/
-> php           
-> [英文地址](https://hub.docker.com/_/php/)              
+> php
+> [英文地址](https://hub.docker.com/_/php/)
 > [中文地址](https://github.com/DaoCloud/library-image/tree/master/php)
 > <br>
-> mysql     
-> [英文地址](https://hub.docker.com/_/mysql/)         
+> mysql
+> [英文地址](https://hub.docker.com/_/mysql/)
 > [中文地址](https://github.com/DaoCloud/library-image/tree/master/mysql)
 > <br>
-> nginx       
-> [英文地址](https://hub.docker.com/_/nginx/)          
+> nginx
+> [英文地址](https://hub.docker.com/_/nginx/)
 > [中文地址](https://github.com/DaoCloud/library-image/tree/master/nginx)
-> 
+>
 > <br>
 > mariadb
 > [英文地址](https://hub.docker.com/_/mariadb/)
 >
 > <br>
-> redis       
+> redis
 > [英文地址](https://hub.docker.com/_/redis/)
-> 
+>
 > <br>
 > mongo
 > [英文地址](https://hub.docker.com/_/mongo/)
 > [中文地址](https://github.com/DaoCloud/library-image/tree/master/mongo)
-> 
+>
 > <br>
-> memcached       
+> memcached
 > [英文地址](https://hub.docker.com/_/memcached/)
-> 
+>
 > <br>
 > rabbitmq
 > [英文地址](https://hub.docker.com/_/rabbitmq/)
 > [中文地址](https://github.com/DaoCloud/library-image/tree/master/rabbitmq)
-> 
+>
 > <br>
 > composer
 > [英文地址](https://hub.docker.com/_/composer/)
-> 
+>
 > <br>
 > ubuntu
 > [英文地址](https://hub.docker.com/_/ubuntu/)
 > [中文地址](https://github.com/DaoCloud/library-image/tree/master/ubuntu)
-> 
+>
 > <br>
 > centos
 > [英文地址](https://hub.docker.com/_/centos/)
 > [中文地址](https://github.com/DaoCloud/library-image/tree/master/centos)
-> 
+>
 
 ####生成mysql镜像部分
 ```sh
@@ -172,6 +172,18 @@ docker run -d -v /mnt/hgfs/website/:/www-data/ --name web ubuntu echo Data-only 
 docker run -d -v /mnt/hgfs/GIT/:/www-data/ --name web training/postgres echo Data-only container for postgres
 ```
 
+###创建rabbitmq容器并创建管理工具
+```sh
+#不带管理界面的
+docker run -d --hostname rabbitmq_server --name rabbitmq rabbitmq:3
+#带管理界面的
+docker run -d --hostname rabbitmq_server --name rabbitadmin -p 8080:15672 rabbitmq:3-management
+##默认账号密码：
+-e RABBITMQ_DEFAULT_USER=user -e RABBITMQ_DEFAULT_PASS=password
+##默认host
+-e RABBITMQ_DEFAULT_VHOST=my_vhost
+```
+
 
 ####生成php镜像部分
 > 有效的php扩展列表为:
@@ -207,7 +219,7 @@ docker run --name php5 --volumes-from web --link memcached:memcached --link mysq
 
 
 ####生成nginx镜像部分
-使用docker-ip查看php容器的ip地址，然后配置好./nginx/vhosts目录下的配置文件，然后生成自定义容器，如下; 
+使用docker-ip查看php容器的ip地址，然后配置好./nginx/vhosts目录下的配置文件，然后生成自定义容器，如下;
 > 注意nginx配置文件的fastcgi_pass参数部分，已经改为了php容器名称，使用此方法可以不用担心容器ip随时切换的问题。
 > 需要注意的是，我们将fastcgi_pass的值从127.0.0.1:9000改为了phpfpm:9000，这里的phpfpm是域名，在nginx容器的/etc/hosts文件中自动配置为phpfpm容器的访问IP。
 
@@ -241,7 +253,8 @@ docker build -t=zhaojianhui129/nginx:latest ./nginx/
 docker run -d -v /home/qianxun/website/:/www-data/ --name web ubuntu echo Data-only container for postgres
 docker run --name memcached -p 11211:11211 -d memcached
 docker run --name redis -d -v /data/redis:/data -p 6379:6379 redis redis-server --appendonly yes
+docker run -d --hostname rabbitmq_server --name rabbitmq -p 8080:15672 rabbitmq:3-management
 docker run --name mysql -v /data/mysql:/var/lib/mysql -p 3306:3306 -d zhaojianhui129/mysql:8 --character-set-server=utf8 --collation-server=utf8_general_ci
-docker run --name php --volumes-from web --link redis:redis_server --link mysql:mysql_server -d zhaojianhui129/php:fpm
+docker run --name php --volumes-from web --link redis:redis_server --link mysql:mysql_server --link rabbitmq:rabbitmq_server -d zhaojianhui129/php:fpm
 docker run --name nginx --volumes-from web --link php:php_server -d zhaojianhui129/nginx:latest
 ```
