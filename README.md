@@ -54,7 +54,7 @@ docker rmi $(docker images | grep "^" | awk "{print $3}")
 
 #设定镜像下载源
 ```sh
-RUN echo "deb http://mirrors.163.com/debian/ jessie main non-free contrib\ndeb http://mirrors.163.com/debian/ jessie-updates main non-free contrib\ndeb http://mirrors.163.com/debian/ jessie-backports main non-free contrib\ndeb-src http://mirrors.163.com/debian/ jessie main non-free contrib\ndeb-src http://mirrors.163.com/debian/ jessie-updates main non-free contrib\ndeb-src http://mirrors.163.com/debian/ jessie-backports main non-free contrib\ndeb http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib\ndeb-src http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib" | tee /etc/apt/sources.list
+RUN echo "deb http://mirrors.aliyun.com/debian wheezy main contrib non-free\ndeb-src http://mirrors.aliyun.com/debian wheezy main contrib non-free\ndeb http://mirrors.aliyun.com/debian wheezy-updates main contrib non-free\ndeb-src http://mirrors.aliyun.com/debian wheezy-updates main contrib non-free\ndeb http://mirrors.aliyun.com/debian-security wheezy/updates main contrib non-free\ndeb-src http://mirrors.aliyun.com/debian-security wheezy/updates main contrib non-free" | tee /etc/apt/sources.list
 ```
 
 官方仓库地址：

@@ -6,14 +6,13 @@
 FROM php:7.0-fpm
 
 #ARG APT_MIRROR=httpredir.debian.org
-RUN echo "deb http://mirrors.aliyun.com/debian wheezy main contrib non-free\ndeb-src http://mirrors.aliyun.com/debian wheezy main contrib non-free\ndeb http://mirrors.aliyun.com/debian wheezy-updates main contrib non-free\ndeb-src http://mirrors.aliyun.com/debian wheezy-updates main contrib non-free\ndeb http://mirrors.aliyun.com/debian-security wheezy/updates main contrib non-free\ndeb-src http://mirrors.aliyun.com/debian-security wheezy/updates main contrib non-free" | tee /etc/apt/sources.list
 
 # init php extension
 RUN apt-get clean && apt-get update && apt-get install -y \
-        libfreetype6 \
-        libjpeg62 \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
         libmcrypt-dev \
-        libpng12 \
+        libpng12-dev \
     && docker-php-ext-install -j$(nproc) iconv mcrypt bcmath shmop sysvsem mbstring pcntl sockets xmlrpc simplexml zip soap gettext session opcache \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-freetype-dir \
     && docker-php-ext-install -j$(nproc) gd \
