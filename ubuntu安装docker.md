@@ -18,7 +18,7 @@ $ sudo apt update
 ##安装与测试
 安装
 ```sh
-$ sudo apt install docker-engine
+$ sudo apt install docker-engine -y
 ```
 
 ##更改仓库(加速)
