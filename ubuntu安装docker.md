@@ -22,6 +22,9 @@ $ sudo apt install docker-engine -y
 ```
 
 ##更改仓库(加速)
+
+curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://0752ec30.m.daocloud.io
+
 ```sh
 sudo cp -bf /lib/systemd/system/docker.service /etc/systemd/system/docker.service
 sudo sed -i "s|ExecStart=/usr/bin/dockerd|ExecStart=/usr/bin/dockerd --registry-mirror=https://qqe07tk2.mirror.aliyuncs.com|g" /etc/systemd/system/docker.service
