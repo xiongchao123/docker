@@ -121,6 +121,11 @@ https://hub.docker.com/explore/
 > [英文地址](https://hub.docker.com/_/centos/)
 > [中文地址](https://github.com/DaoCloud/library-image/tree/master/centos)
 >
+><br>
+> HAProxy
+> HAProxy是一个使用C语言编写的自由及开放源代码软件[1]，其提供高可用性、负载均衡，以及基于TCP和HTTP的应用程序代理。
+> [英文地址](https://hub.docker.com/_/haproxy/)
+>
 
 ####生成mysql镜像部分
 ```sh
