@@ -23,6 +23,15 @@ RUN apt-get clean && apt-get update && apt-get install -y \
 # Add git
 RUN apt-get install -y git
 
+#Add Xdebug
+RUN git clone --depth=1 https://github.com/xdebug/xdebug.git /tmp/xdebug-ext \
+    && cd /tmp/xdebug-ext \
+    && phpize \
+    && ./configure --enable-xdebug \
+    && make && make install \
+    && docker-php-ext-enable xdebug \
+    && rm -rf /tmp/xdebug-ext
+
 # Add memcached
 RUN apt-get install -y libmemcached-dev \
     && git clone --depth=1 -v https://github.com/php-memcached-dev/php-memcached.git -b master /tmp/memcached-ext \

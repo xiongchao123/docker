@@ -121,6 +121,11 @@ https://hub.docker.com/explore/
 > [英文地址](https://hub.docker.com/_/centos/)
 > [中文地址](https://github.com/DaoCloud/library-image/tree/master/centos)
 >
+><br>
+> HAProxy
+> HAProxy是一个使用C语言编写的自由及开放源代码软件[1]，其提供高可用性、负载均衡，以及基于TCP和HTTP的应用程序代理。
+> [英文地址](https://hub.docker.com/_/haproxy/)
+>
 
 ####生成mysql镜像部分
 ```sh
@@ -255,6 +260,6 @@ docker run --name memcached -p 11211:11211 -d memcached
 docker run --name redis -d -v /data/redis:/data -p 6379:6379 redis redis-server --appendonly yes
 docker run -d --hostname rabbitmq_server --name rabbitmq -p 8080:15672 rabbitmq:3-management
 docker run --name mysql -v /data/mysql:/var/lib/mysql -p 3306:3306 -d zhaojianhui129/mysql:8 --character-set-server=utf8 --collation-server=utf8_general_ci
-docker run --name php --volumes-from web --link redis:redis_server --link mysql:mysql_server --link rabbitmq:rabbitmq_server -d zhaojianhui129/php:fpm
+docker run --name php --volumes-from web --link memcached:memcached_host --link redis:redis_host --link mysql:mysql_host --link rabbitmq:rabbitmq_host -d zhaojianhui129/php:fpm
 docker run --name nginx --volumes-from web --link php:php_server -d zhaojianhui129/nginx:latest
 ```
