@@ -108,7 +108,7 @@ mysql> start slave;
 ```
 
 检验双主互备
-①通过分别在两台服务器上使用show slave status\G，查询主库信息以及IO进程、SQL进程工作状态。若两台服务器的查询结果都为Slave_IO_Running: Yes，Slave_SQL_Running: Yes；则表示当前双主互备状态正常。
+①通过分别在两台服务器上使用`show slave status\G`，查询主库信息以及IO进程、SQL进程工作状态。若两台服务器的查询结果都为Slave_IO_Running: Yes，Slave_SQL_Running: Yes；则表示当前双主互备状态正常。
 
 ②在mysqlServer1数据库上建库建表，检查mysqlServer2上是否同步正常；然后在mysqlServer2上建库建表，检查mysqlServer1上是否同步正常。 
 
