@@ -270,13 +270,14 @@ mysql> show slave status\G;
 选择对应jdk版本下载。
 ```sh
 sudo mkdir /usr/java
-sudo cp ~/下载/jdk-8u121-linux-x64.tar.gz /usr/java/
-sudo tar -zxvf jdk-8u121-linux-x64.tar.gz
+sudo cp ~/下载/jdk-8u20-linux-x64.tar.gz /usr/java/
+cd /usr/java/
+sudo tar zxvf jdk-8u20-linux-x64.tar.gz
 sudo vim /etc/profile
 #最后一行添加如下内容
 #------
 #JAVA
-JAVA_HOME=/usr/java/jdk1.8.0_121
+JAVA_HOME=/usr/java/jdk1.8.0_20
 CLASSPATH=$JAVA_HOME/lib/
 PATH=$PATH:$JAVA_HOME/bin
 export PATH JAVA_HOME CLASSPATH
@@ -290,3 +291,13 @@ java -version
 MyCAT 在 Linux 中部署启动时,首先需要在 Linux 系统的环境变量中配置 MYCAT_HOME,操作方式如下:
 1) vi /etc/profile,在系统环境变量文件中增加 MYCAT_HOME=/usr/local/Mycat
 2) 执行 source /etc/profile 命令,使环境变量生效。
+
+#mycat全部配置完成才能正常启动
+```sh
+./mycat console
+./mycat start
+./mycat restart
+```
+端口：127.0.0.1:9066
+账号密码为server.xml配置的账号密码。
+配置完mycat后修改表结构或者新增表需要在连接mycat端口进行操作，mycat会自动按照数据节点规则创建表。
