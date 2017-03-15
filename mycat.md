@@ -1,5 +1,8 @@
 #Mycat双主互备
 
+利用mycat实现如下架构图：
+![mycat架构图](./images/mycat.jpg)
+
 ###参考地址：
 http://www.linuxidc.com/Linux/2017-02/141173.htm
 
