@@ -268,6 +268,23 @@ mysql> show slave status\G;
 ###JDK安装
 登录网址：http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 选择对应jdk版本下载。
+```sh
+sudo mkdir /usr/java
+sudo cp ~/下载/jdk-8u121-linux-x64.tar.gz /usr/java/
+sudo tar -zxvf jdk-8u121-linux-x64.tar.gz
+sudo vim /etc/profile
+#最后一行添加如下内容
+#------
+#JAVA
+JAVA_HOME=/usr/java/jdk1.8.0_121
+CLASSPATH=$JAVA_HOME/lib/
+PATH=$PATH:$JAVA_HOME/bin
+export PATH JAVA_HOME CLASSPATH
+#-------
+#重启机器或
+source /etc/profile
+java -version
+```
 
 
 MyCAT 在 Linux 中部署启动时,首先需要在 Linux 系统的环境变量中配置 MYCAT_HOME,操作方式如下:
