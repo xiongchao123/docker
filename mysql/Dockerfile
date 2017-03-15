@@ -14,7 +14,7 @@ RUN echo "deb http://mirrors.163.com/debian/ jessie main non-free contrib\ndeb h
 RUN apt-get update && apt-get upgrade -y
 
 # Add vim
-RUN apt-get install -y vim
+RUN apt-get install -y vim wget gcc make
 
 #配置指令
 # 数据库root账号密码
