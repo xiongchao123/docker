@@ -70,6 +70,12 @@ replicate-wild-ignore-table=information_schema.%
 #---------
 ```
 
+重启：
+```sh
+docker restart mysqlServer1
+docker restart mysqlServer2
+```
+
 在mysqlServer1服务器上指定mysqlServer2为自己的主服务器并开启slave
 ```sh
 ---
@@ -85,6 +91,7 @@ mysql> flush privileges;
 ---
 docker-enter mysqlServer1
 ---
+####ip查看好
 mysql -u root -p
 mysql> change master to master_host='172.17.0.9',master_user='repl_user',master_password='123456',master_log_file='mysql-bin.000001',master_log_pos=493;
 mysql> start slave;

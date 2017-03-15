@@ -8,7 +8,10 @@ FROM mysql:8
 #ARG APT_MIRROR=httpredir.debian.org
 
 # 更新类库
-RUN apt-get update
+RUN apt-get update && apt-get upgrade -y
+
+# Add vim
+RUN apt-get install -y vim
 
 #配置指令
 # 数据库root账号密码
