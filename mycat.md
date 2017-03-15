@@ -266,7 +266,9 @@ mysql> show slave status\G;
 至此，主主备份，一主多从配置完成，
 
 ###JDK安装
-#
+登录网址：http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+选择对应jdk版本下载。
+
 
 MyCAT 在 Linux 中部署启动时,首先需要在 Linux 系统的环境变量中配置 MYCAT_HOME,操作方式如下:
 1) vi /etc/profile,在系统环境变量文件中增加 MYCAT_HOME=/usr/local/Mycat
