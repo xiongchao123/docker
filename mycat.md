@@ -273,14 +273,14 @@ mysql> show slave status\G;
 选择对应jdk版本下载。
 ```sh
 sudo mkdir /usr/java
-sudo cp ~/下载/jdk-8u20-linux-x64.tar.gz /usr/java/
+sudo cp ~/下载/jdk-8u121-linux-x64.tar.gz /usr/java/
 cd /usr/java/
-sudo tar zxvf jdk-8u20-linux-x64.tar.gz
+sudo tar zxvf jdk-8u121-linux-x64.tar.gz
 sudo vim /etc/profile
 #最后一行添加如下内容
 #------
 #JAVA
-JAVA_HOME=/usr/java/jdk1.8.0_20
+JAVA_HOME=/usr/java/jdk1.8.0_121
 CLASSPATH=$JAVA_HOME/lib/
 PATH=$PATH:$JAVA_HOME/bin
 export PATH JAVA_HOME CLASSPATH
