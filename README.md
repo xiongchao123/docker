@@ -125,6 +125,10 @@ https://hub.docker.com/explore/
 > HAProxy
 > HAProxy是一个使用C语言编写的自由及开放源代码软件[1]，其提供高可用性、负载均衡，以及基于TCP和HTTP的应用程序代理。
 > [英文地址](https://hub.docker.com/_/haproxy/)
+
+><br>
+>elasticsearch
+>[英文地址](https://hub.docker.com/_/elasticsearch/)
 >
 
 ####生成mysql镜像部分
