@@ -173,6 +173,11 @@ docker run --name memcached -p 11211:11211 -d memcached
 docker run --name redis -d -v /data/redis:/data -p 6379:6379 redis redis-server --appendonly yes
 ```
 
+###启动mongo容器，
+```sh
+docker run --name mongodb -v /data/mongodb:/data/db -d mongo:latest
+```
+
 ####挂载一个主机目录作为代码数据卷容器
 ```sh
 #自己脑洞大开想的，因为ubuntu镜像比较小
