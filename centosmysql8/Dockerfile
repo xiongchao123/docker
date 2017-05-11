@@ -13,7 +13,7 @@ FROM mysql:8
 RUN apt-get update && apt-get upgrade -y
 
 # Add vim
-#RUN apt-get install -y vim wget gcc make
+RUN apt-get install -y vim wget gcc make
 
 #配置指令
 # 数据库root账号密码
