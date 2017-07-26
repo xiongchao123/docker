@@ -270,7 +270,7 @@ docker run --name memcached -p 11211:11211 -d memcached
 #redis：
 docker run --name redis -d -v /data/redis:/data -p 6379:6379 redis redis-server --appendonly yes
 #rabbitmq
-docker run -d --hostname rabbitmq_server --name rabbitmq -p 8080:15672 rabbitmq:3-management
+docker run -d --hostname rabbitmq_server --name rabbitmq -p 8081:15672 rabbitmq:3-management
 #mysql
 docker run --name mysql -v /data/mysql:/var/lib/mysql -p 3306:3306 -d zhaojianhui129/mysql:8 --character-set-server=utf8 --collation-server=utf8_general_ci
 #php:
@@ -279,4 +279,6 @@ docker run --name php --volumes-from web --link memcached:memcached_host --link 
 docker run --name nginx --volumes-from web --link php:php_server -d zhaojianhui129/nginx:latest
 #wordpress
 docker run --name wordpress --link mysql:mysql -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=123456 -e WORDPRESS_DB_NAME=wordpress -p 8082:80 -d wordpress:php7.1-apache
+#elasticsearch
+docker run --name elas -p 9200:9200 -d -v "$PWD/esdata":/usr/share/elasticsearch/data elasticsearch -Etransport.host=0.0.0.0 -Ediscovery.zen.minimum_master_nodes=1
 ```
