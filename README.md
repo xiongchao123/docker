@@ -263,12 +263,20 @@ docker build -t=zhaojianhui129/php:fpm ./php7fpm/
 docker build -t=zhaojianhui129/php:cli ./php7cli/
 docker build -t=zhaojianhui129/php:5-fpm ./php5fpm/
 docker build -t=zhaojianhui129/nginx:latest ./nginx/
-
+#数据卷容器
 docker run -d -v /home/qianxun/website/:/www-data/ --name web ubuntu echo Data-only container for postgres
+#memcached：
 docker run --name memcached -p 11211:11211 -d memcached
+#redis：
 docker run --name redis -d -v /data/redis:/data -p 6379:6379 redis redis-server --appendonly yes
+#rabbitmq
 docker run -d --hostname rabbitmq_server --name rabbitmq -p 8080:15672 rabbitmq:3-management
+#mysql
 docker run --name mysql -v /data/mysql:/var/lib/mysql -p 3306:3306 -d zhaojianhui129/mysql:8 --character-set-server=utf8 --collation-server=utf8_general_ci
+#php:
 docker run --name php --volumes-from web --link memcached:memcached_host --link redis:redis_host --link mysql:mysql_host --link rabbitmq:rabbitmq_host -d zhaojianhui129/php:fpm
+#nginx
 docker run --name nginx --volumes-from web --link php:php_server -d zhaojianhui129/nginx:latest
+#wordpress
+docker run --name wordpress --link mysql:mysql -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=123456 -e WORDPRESS_DB_NAME=wordpress -p 8082:80 -d wordpress:php7.1-apache
 ```
