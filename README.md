@@ -134,9 +134,9 @@ https://hub.docker.com/explore/
 ####生成mysql镜像部分
 ```sh
 //mysql5.7
-docker build -t=zhaojianhui129/mysql:latest ./mysql/
+docker build -t=zhaojianhui129/mysql:5.7 ./mysql5.7/
 //mysql8
-docker build -t=zhaojianhui129/mysql:8 ./mysql8/
+docker build -t=zhaojianhui129/mysql:8.0 ./mysql8.0/
 ```
 启动MYSQL容器：
 ```sh
@@ -204,9 +204,15 @@ docker run -d --hostname rabbitmq_server --name rabbitadmin -p 8080:15672 rabbit
 > bcmath bz2 calendar ctype curl dba dom enchant exif fileinfo filter ftp gd gettext gmp hash iconv imap interbase intl json ldap mbstring mcrypt mysqli oci8 odbc opcache pcntl pdo pdo_dblib pdo_firebird pdo_mysql pdo_oci pdo_odbc pdo_pgsql pdo_sqlite pgsql phar posix pspell readline recode reflection session shmop simplexml snmp soap sockets spl standard sysvmsg sysvsem sysvshm tidy tokenizer wddx xml xmlreader xmlrpc xmlwriter xsl zip
 
 ```sh
-#php7
-docker build -t=zhaojianhui129/php:fpm ./php7fpm/
-docker build -t=zhaojianhui129/php:cli ./php7cli/
+#php7.0
+docker build -t=zhaojianhui129/php:php7.0-fpm ./php7.0-fpm/
+docker build -t=zhaojianhui129/php:php7.0-cli ./php7.0-cli/
+#php7.1
+docker build -t=zhaojianhui129/php:php7.1-fpm ./php7.1-fpm/
+docker build -t=zhaojianhui129/php:php7.1-cli ./php7.1-cli/
+#php7.2
+docker build -t=zhaojianhui129/php:php7.2-fpm ./php7.2-fpm/
+docker build -t=zhaojianhui129/php:php7.2-cli ./php7.2-cli/
 #php5
 docker build -t=zhaojianhui129/php:5-fpm ./php5fpm/
 ```
