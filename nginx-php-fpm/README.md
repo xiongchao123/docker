@@ -44,7 +44,7 @@ docker run --name nginx-php-fpm -d -e 'GIT_EMAIL=email_address' -e 'GIT_NAME=ful
 然后，您可以浏览以```http://<DOCKER_HOST>```查看默认的安装文件。要找到您的DOCKER_HOST使用docker inspect，以获得IP地址（通常为172.17.0.2）
 
 有关详细的示例和说明，请参阅文档。
-## Documentation
+## 文档
 
 - [生成镜像](docs/building.md)
 - [版本](docs/versioning.md)
