@@ -5,7 +5,7 @@ MAINTAINER Zhao Janhui <zhaojianhui129@163.com>
 #Add php extensions
 
 # Add memcached
-RUN apk add --no-cache --virtua .build-deps autoconf make libc-dev libmemcached-dev \
+RUN apk add --no-cache --virtua .build-deps autoconf gcc libc-dev make libmemcached-dev \
     && git clone --depth=1 -v https://github.com/php-memcached-dev/php-memcached.git /tmp/memcached-ext \
     && cd /tmp/memcached-ext \
     && phpize \
