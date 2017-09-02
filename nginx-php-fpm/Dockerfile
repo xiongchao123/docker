@@ -5,7 +5,7 @@ MAINTAINER Zhao Janhui <zhaojianhui129@163.com>
 #Add php extensions
 
 # Add memcached
-RUN apk --update add gcc libmemcached-dev \
+RUN apk --update add libmemcached-dev \
     && pecl install memcached-3.0.3 \
     && pecl install redis-3.1.3 \
     && docker-php-ext-enable redis xdebug
