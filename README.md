@@ -85,6 +85,10 @@ https://hub.docker.com/explore/
 > [英文地址](https://hub.docker.com/_/nginx/)
 > [中文地址](https://github.com/DaoCloud/library-image/tree/master/nginx)
 >
+> nginx-php-fpm
+> [英文地址](https://hub.docker.com/r/richarvey/nginx-php-fpm/)
+> 
+> 
 > <br>
 > mariadb
 > [英文地址](https://hub.docker.com/_/mariadb/)
