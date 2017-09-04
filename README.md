@@ -214,6 +214,7 @@ docker build -t=zhaojianhui129/php:php7.0-cli ./php7.0-cli/
 #php7.1
 docker build -t=zhaojianhui129/php:php7.1-fpm ./php7.1-fpm/
 docker build -t=zhaojianhui129/php:php7.1-cli ./php7.1-cli/
+docker build -t=zhaojianhui129/php:php7.1-apache ./php7.1-apache/
 #php7.2
 docker build -t=zhaojianhui129/php:php7.2-fpm ./php7.2-fpm/
 docker build -t=zhaojianhui129/php:php7.2-cli ./php7.2-cli/
@@ -269,8 +270,8 @@ docker push zhaojianhui129/php:fpm
 ###命令集合
 ```sh
 docker build -t=zhaojianhui129/mysql:8 ./mysql8/
-docker build -t=zhaojianhui129/php:fpm ./php7fpm/
-docker build -t=zhaojianhui129/php:cli ./php7cli/
+docker build -t=zhaojianhui129/php:php7.1-fpm ./php7.1-fpm/
+docker build -t=zhaojianhui129/php:php7.1-cli ./php7.1-cli/
 docker build -t=zhaojianhui129/php:5-fpm ./php5fpm/
 docker build -t=zhaojianhui129/nginx:latest ./nginx/
 #数据卷容器
@@ -291,4 +292,19 @@ docker run --name nginx --volumes-from web --link php:php_server -d zhaojianhui1
 docker run --name wordpress --link mysql:mysql -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=123456 -e WORDPRESS_DB_NAME=wordpress -p 8082:80 -d wordpress:php7.1-apache
 #elasticsearch
 docker run --name elas -p 9200:9200 -d -v "$PWD/esdata":/usr/share/elasticsearch/data elasticsearch -Etransport.host=0.0.0.0 -Ediscovery.zen.minimum_master_nodes=1
+```
+
+
+
+##王滔企业官网启动命令
+###apache
+```
+docker run -d -p 80:80 --name app -v "$PWD":/var/www -v "$PWD"/publc:/var/www/html zhaojianhui129/php:php7.1-apache
+```
+###nginx+php-fpm
+```
+docker run -d -v /data/wwwroot/:/data/wwwroot/ --name wwwroot ubuntu echo Data-only container for postgres
+docker build -t=zhaojianhui129/php:php7.1-fpm ./php7.1-fpm/
+docker run --name php --volumes-from wwwroot --link mysql:mysql_host -d zhaojianhui129/php:php7.1-fpm
+docker run --name nginx --volumes-from wwwroot --link php:php_server -d zhaojianhui129/nginx:latest
 ```
