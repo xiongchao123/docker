@@ -312,7 +312,7 @@ docker run -d -v /data/wwwroot/:/data/wwwroot/ --name wwwroot ubuntu echo Data-o
 docker build -t=zhaojianhui129/php:php7.1-fpm ./php7.1-fpm/
 docker run --name php --volumes-from wwwroot --link mysql:mysql_server -d zhaojianhui129/php:php7.1-fpm
 #nginx容器
-docker run --name nginx --volumes-from wwwroot --link php:php_server -d zhaojianhui129/nginx:latest
+docker run --name nginx --volumes-from wwwroot --link php:php_server -d nginx:latest
 docker cp nginx/vhosts/soft.wangdaxian.conf nginx:/etc/nginx/conf.d/soft.wangdaxian.conf
 docker restart nginx
 ```
