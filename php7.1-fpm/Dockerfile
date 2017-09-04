@@ -58,22 +58,22 @@ RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git /tmp/phpredi
     && rm -rf /tmp/phpredis-ext
 
 # Add swoole
-RUN git clone --depth=1 https://git.oschina.net/swoole/swoole.git /tmp/swoole-ext \
-    && cd /tmp/swoole-ext \
-    && phpize \
-    && ./configure \
-    && make && make install \
-    && docker-php-ext-enable swoole \
-    && rm -rf /tmp/swoole-ext
+#RUN git clone --depth=1 https://git.oschina.net/swoole/swoole.git /tmp/swoole-ext \
+#    && cd /tmp/swoole-ext \
+#    && phpize \
+#    && ./configure \
+#    && make && make install \
+#    && docker-php-ext-enable swoole \
+#    && rm -rf /tmp/swoole-ext
 
 # Add runkit
-RUN git clone --depth=1 https://github.com/runkit7/runkit7.git /tmp/runkit-ext \
-    && cd /tmp/runkit-ext \
-    && phpize \
-    && ./configure \
-    && make && make install \
-    && docker-php-ext-enable runkit \
-    && rm -rf /tmp/runkit-ext
+#RUN git clone --depth=1 https://github.com/runkit7/runkit7.git /tmp/runkit-ext \
+#    && cd /tmp/runkit-ext \
+#    && phpize \
+#    && ./configure \
+#    && make && make install \
+#    && docker-php-ext-enable runkit \
+#    && rm -rf /tmp/runkit-ext
 
 # remove git
 RUN apt-get autoremove -y git
