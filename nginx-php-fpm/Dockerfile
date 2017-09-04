@@ -2,6 +2,8 @@ FROM richarvey/nginx-php-fpm:latest
 
 MAINTAINER Zhao Janhui <zhaojianhui129@163.com>
 
+composer config -g repo.packagist composer https://packagist.phpcomposer.com
+
 #Add php extensions
 
 # Add memcached

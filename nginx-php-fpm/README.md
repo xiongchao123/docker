@@ -42,9 +42,12 @@ docker run --name nginx-php-fpm -d -e 'GIT_EMAIL=email_address' -e 'GIT_NAME=ful
 ```
 
 ```
-docker run --name np -d -e 'GIT_EMAIL=zhaojianhui129@163.com' -e 'GIT_NAME=zhaojianhui' -e 'GIT_USERNAME=zhaojianhui' -e 'GIT_REPO=gitee.com/wangtao_2/QiYeGuanWang' -e 'GIT_PERSONAL_TOKEN=peace&890129' -p 80:80 richarvey/nginx-php-fpm:latest
+docker run --name np -d -e 'GIT_EMAIL=zhaojianhui129@163.com' -e 'GIT_NAME=zhaojianhui' -e 'GIT_USERNAME=zhaojianhui' -e 'GIT_REPO=gitee.com/wangtao_2/QiYeGuanWang' -e 'GIT_PERSONAL_TOKEN=peace&890129' -p 80:80 --link mysql:mysql_server richarvey/nginx-php-fpm:latest
 ```
-
+apache:
+```
+docker run -d -p 80:80 --name app -v /data/wwwroot/QiYeGuanWang/:/var/www/ -v /data/wwwroot/QiYeGuanWang/public/:/var/www/html php:7.1-apache
+```
 
 然后，您可以浏览以```http://<DOCKER_HOST>```查看默认的安装文件。要找到您的DOCKER_HOST使用docker inspect，以获得IP地址（通常为172.17.0.2）
 
