@@ -42,11 +42,11 @@ RUN apt-get install -y libmemcached-dev \
     && rm -rf /tmp/memcached-ext
 
 # Add phalcon framework
-RUN git clone --depth=1 -v https://github.com/phalcon/cphalcon.git /tmp/phalcon-ext \
-    && cd /tmp/phalcon-ext/build \
-    && ./install \
-    && docker-php-ext-enable phalcon \
-    && rm -rf /tmp/phalcon-ext
+#RUN git clone --depth=1 -v https://github.com/phalcon/cphalcon.git /tmp/phalcon-ext \
+#    && cd /tmp/phalcon-ext/build \
+#    && ./install \
+#    && docker-php-ext-enable phalcon \
+#    && rm -rf /tmp/phalcon-ext
 
 # Add phpredis
 RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git /tmp/phpredis-ext \

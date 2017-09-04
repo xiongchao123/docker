@@ -299,12 +299,20 @@ docker run --name elas -p 9200:9200 -d -v "$PWD/esdata":/usr/share/elasticsearch
 ##王滔企业官网启动命令
 ###apache
 ```
-docker run -d -p 80:80 --name app -v "$PWD":/var/www -v "$PWD"/publc:/var/www/html zhaojianhui129/php:php7.1-apache
+docker build -t=zhaojianhui129/php:php7.1-apache ./php7.1-apache/
+docker run -d -p 80:80 --name app -v "$PWD":/var/www -v "$PWD"/public:/var/www/html zhaojianhui129/php:php7.1-apache
 ```
 ###nginx+php-fpm
 ```
+#数据库
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=test -e MYSQL_USER=qianxun -e MYSQL_PASSWORD=123456 -v /data/mysql:/var/lib/mysql -p 3306:3306 -d mysql:8 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+#代码数据卷
 docker run -d -v /data/wwwroot/:/data/wwwroot/ --name wwwroot ubuntu echo Data-only container for postgres
+#php容器
 docker build -t=zhaojianhui129/php:php7.1-fpm ./php7.1-fpm/
 docker run --name php --volumes-from wwwroot --link mysql:mysql_server -d zhaojianhui129/php:php7.1-fpm
+#nginx容器
 docker run --name nginx --volumes-from wwwroot --link php:php_server -d zhaojianhui129/nginx:latest
+docker cp nginx/vhosts/soft.wangdaxian.conf nginx:/etc/nginx/conf.d/soft.wangdaxian.conf
+docker restart nginx
 ```
