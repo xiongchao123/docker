@@ -14,13 +14,6 @@ RUN apk add --no-cache --virtua .build-deps autoconf gcc libc-dev make libmemcac
     && docker-php-ext-enable memcached \
     && rm -rf /tmp/memcached-ext
 
-# Add phalcon framework
-RUN git clone --depth=1 -v https://github.com/phalcon/cphalcon.git /tmp/phalcon-ext \
-    && cd /tmp/phalcon-ext/build \
-    && ./install \
-    && docker-php-ext-enable phalcon \
-    && rm -rf /tmp/phalcon-ext
-
 # Add phpredis
 RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git /tmp/phpredis-ext \
     && cd /tmp/phpredis-ext \
@@ -30,13 +23,19 @@ RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git /tmp/phpredi
     && docker-php-ext-enable redis \
     && rm -rf /tmp/phpredis-ext
 
-# Add swoole
-RUN git clone --depth=1 https://git.oschina.net/swoole/swoole.git /tmp/swoole-ext \
-    && cd /tmp/swoole-ext \
-    && phpize \
-    && ./configure \
-    && make && make install \
-    && docker-php-ext-enable swoole \
-    && rm -rf /tmp/swoole-ext
-
 RUN apk del autoconf gcc
+
+#composer config
+composer config -g repo.packagist composer https://packagist.phpcomposer.com
+
+# Add Scripts
+ADD scripts/start.sh /start.sh
+ADD scripts/pull /usr/bin/pull
+ADD scripts/push /usr/bin/push
+
+# copy in code
+ADD src/ /var/www/html/
+ADD errors/ /var/www/errors
+
+
+CMD ["/start.sh"]
