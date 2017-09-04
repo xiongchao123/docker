@@ -305,6 +305,6 @@ docker run -d -p 80:80 --name app -v "$PWD":/var/www -v "$PWD"/publc:/var/www/ht
 ```
 docker run -d -v /data/wwwroot/:/data/wwwroot/ --name wwwroot ubuntu echo Data-only container for postgres
 docker build -t=zhaojianhui129/php:php7.1-fpm ./php7.1-fpm/
-docker run --name php --volumes-from wwwroot --link mysql:mysql_host -d zhaojianhui129/php:php7.1-fpm
+docker run --name php --volumes-from wwwroot --link mysql:mysql_server -d zhaojianhui129/php:php7.1-fpm
 docker run --name nginx --volumes-from wwwroot --link php:php_server -d zhaojianhui129/nginx:latest
 ```
