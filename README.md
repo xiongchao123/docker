@@ -300,7 +300,7 @@ docker run --name elas -p 9200:9200 -d -v "$PWD/esdata":/usr/share/elasticsearch
 ###apache
 ```
 docker build -t=zhaojianhui129/php:php7.1-apache ./php7.1-apache/
-docker run -d -p 80:80 --name app -v "$PWD":/var/www -v "$PWD"/public:/var/www/html zhaojianhui129/php:php7.1-apache
+docker run -d -p 80:80 --name app -v "$PWD":/var/www -v "$PWD"/public:/var/www/html --link mysql:mysql_server zhaojianhui129/php:php7.1-apache
 ```
 ###nginx+php-fpm
 ```
