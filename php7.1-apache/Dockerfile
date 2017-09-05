@@ -5,9 +5,6 @@
 
 FROM php:7.1-apache
 
-# add apache module
-RUN a2enmod rewrite
-
 # init php extension
 RUN apt-get clean && apt-get update && apt-get install -y \
         libfreetype6-dev \
@@ -52,3 +49,14 @@ RUN git clone --depth=1 -v https://github.com/phpredis/phpredis.git /tmp/phpredi
 
 # remove git
 RUN apt-get autoremove -y git
+
+
+# add apache module
+RUN a2enmod rewrite
+# change apache default work director
+ENV APACHE_WORK_PATH /var/www/html
+ENV APACHE_ROOT_PATH $APACHE_WORK_PATH/public
+
+#RUN sed -i "s|<Directory /var/www/>|<Directory $APACHE_WORK_PATH>|g" /etc/apache2/conf-available/docker-php.conf
+
+RUN sed -i "s|DocumentRoot /var/www/html|DocumentRoot $APACHE_ROOT_PATH|g" /etc/apache2/sites-enabled/000-default.conf
